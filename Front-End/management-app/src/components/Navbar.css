@@ -249,3 +249,28 @@ span{
     border-radius: 80px;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 1);
 }
+
+.logout-button{
+    position: absolute;
+    bottom: 0;
+    background-color: #088992; /* Green */
+    border: solid 1px rgb(252, 249, 249, 0.5);
+    color: white;
+    padding: 7px 25px;
+    margin-bottom: 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 19px;
+    font-weight: 700;
+    border-radius: 8px;
+    max-width: 150px;
+    cursor: pointer;
+    transition: .45s;
+    box-shadow: 0px 0px 5px 2px rgb(0,0,0, 0.35);
+}
+
+.logout-button:hover{
+    background-color: #02586b;
+    transition: 0.3s;
+}

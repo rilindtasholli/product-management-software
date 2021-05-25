@@ -3,8 +3,24 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 
 .main-content-client{
   margin-top: 20px;
+
+  
+  animation: loadMainContent ease 0.5s;
+}
+
+@keyframes loadMainContent{
+  0%{
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+
 }
