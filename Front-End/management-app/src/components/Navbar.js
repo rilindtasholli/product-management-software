@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { RiSettings4Fill } from 'react-icons/ri';
+import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
 import { FaBell } from 'react-icons/fa';
@@ -44,6 +45,8 @@ function Navbar() {
                         )
                     })}
                 </ul>
+                
+                <a className='logout-button' href='/'>Logout <FiLogOut size='15px'/></a>
             </nav>
         </>
     )

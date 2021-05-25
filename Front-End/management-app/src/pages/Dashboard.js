@@ -5,9 +5,30 @@ export class Dashboard extends Component {
     render() {
         return (
             <div className='main-content'>
-                <h1>Dashboard</h1>
-                <p>this is products</p>
-                
+                <div>
+                    <div className='sales-activity'>
+                        <h1 className='container-title' >Sales Activity</h1>
+                        <div className='sales-items'>
+                            <div className='sales-item'>
+                                <h1 className='item-data'>15</h1>
+                                <h3 className='item-title'>Today</h3>
+                            </div>
+                            <div className='sales-item'>
+                                <h1 className='item-data'>152</h1>
+                                <h3 className='item-title'>This Month</h3>
+                            </div>
+                            <div className='sales-item'>
+                            <h1 className='item-data'>1860</h1>
+                                <h3 className='item-title'>This Year</h3>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                {/* <div className='account-data'>
+                    
+                </div> */}
+
+
                 
             </div>
         )
