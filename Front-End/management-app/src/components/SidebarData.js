@@ -6,6 +6,10 @@ import { FiPackage } from 'react-icons/fi';
 import { AiFillAppstore } from 'react-icons/ai';
 import { FaChartLine } from 'react-icons/fa';
 import { FaWarehouse } from 'react-icons/fa';
+import { FaLuggageCart } from 'react-icons/fa';
+import { GiPieChart } from 'react-icons/gi';
+import { RiSettings4Fill } from 'react-icons/ri';
+import { RiAccountCircleFill } from 'react-icons/ri';
 
 export const SidebarData = [
     {
@@ -41,25 +45,25 @@ export const SidebarData = [
     {
         title: 'Orders',
         path: '/orders',
-        icon: <AiFillAppstore className='nav-link-icon'/>,
+        icon: <FaLuggageCart className='nav-link-icon'/>,
         cName: 'nav-text'
     },
     {
         title: 'Data & Reports',
         path: '/reports',
-        icon: <AiFillAppstore className='nav-link-icon'/>,
+        icon: <GiPieChart className='nav-link-icon'/>,
         cName: 'nav-text'
     },
     {
         title: 'Settings',
         path: '/settings',
-        icon: <AiFillAppstore className='nav-link-icon'/>,
+        icon: <RiSettings4Fill className='nav-link-icon'/>,
         cName: 'nav-text'
     },
     {
         title: 'Account',
         path: '/account',
-        icon: <AiFillAppstore className='nav-link-icon'/>,
+        icon: <RiAccountCircleFill className='nav-link-icon'/>,
         cName: 'nav-text'
     },
 ]
