@@ -4,3 +4,7 @@
   align-items: center;
   flex-direction: column;
 }
+
+.main-content-client{
+  margin-top: 20px;
+}
