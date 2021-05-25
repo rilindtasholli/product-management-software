@@ -6,6 +6,8 @@ import { FiPackage } from 'react-icons/fi';
 import { AiFillAppstore } from 'react-icons/ai';
 import { FaChartLine } from 'react-icons/fa';
 import { FaWarehouse } from 'react-icons/fa';
+import {BsFillPersonFill} from 'react-icons/bs'
+import {FaPersonBooth} from 'react-icons/fa'
 
 export const SidebarData = [
     {
@@ -30,6 +32,18 @@ export const SidebarData = [
         title: 'Sales',
         path: '/sales',
         icon: <FaChartLine className='nav-link-icon'/>,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Employees',
+        path: '/employees',
+        icon: <BsFillPersonFill className='nav-link-icon'/>,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Clients',
+        path: '/clients',
+        icon: <FaPersonBooth className='nav-link-icon'/>,
         cName: 'nav-text'
     },
     {
