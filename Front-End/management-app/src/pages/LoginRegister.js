@@ -35,7 +35,7 @@ export class LoginRegister extends Component {
         return (
             <div className='main-content'>
                 <MdDashboard className='logo'/>
-               <div className='container'>
+               <div className='main-container'>
                     <div className='login-register-form-buttons'>
                         <a className={loginFormActive ? 'login-form-button buttonActive' : 'login-form-button'} onClick={() => this.changeFormLogin()}>Login</a>
                         <a className={loginFormActive ? 'register-form-button' : 'register-form-button buttonActive'} onClick={() => this.changeFormRegister()}>Register</a>
@@ -53,7 +53,7 @@ export class LoginRegister extends Component {
                         <div className={loginFormActive ? 'register-main-form hidden' : 'register-main-form'}>
                         <form className='register-form'>
                                 <ImUserPlus className='registerIcon'/>
-                                <h3 className='register-title'>Create a new account</h3>
+                                <h4 className='register-title'>Create a new account</h4>
                                 <div className='name-section'>
                                     <input className='input-short' type='text' placeholder="First Name" />
                                     <input className='input-short' type='text' placeholder="Last Name" />

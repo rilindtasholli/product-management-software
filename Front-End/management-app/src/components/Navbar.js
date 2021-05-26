@@ -15,7 +15,8 @@ function Navbar() {
     const showSideBar = () => setSideBar(!sidebar);
     return (
         <>
-            <div className="navbar" >
+
+            <div className="navbar-header">
                 <NavLink to="#" className='menu-bars'>
                     <FaBars onClick={showSideBar}/>
                 </NavLink>
