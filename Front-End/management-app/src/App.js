@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import LoginRegister from './pages/LoginRegister';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export class App extends Component {
   constructor(props) {
