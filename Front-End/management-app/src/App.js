@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Clients from './pages/Clients';
 import LoginRegister from './pages/LoginRegister';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export class App extends Component {
   constructor(props) {
