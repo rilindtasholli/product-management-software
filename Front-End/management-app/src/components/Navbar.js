@@ -15,20 +15,21 @@ function Navbar() {
     const showSideBar = () => setSideBar(!sidebar);
     return (
         <>
+
             <div className="navbar-header">
                 <NavLink to="#" className='menu-bars'>
                     <FaBars onClick={showSideBar}/>
                 </NavLink>
-                <div className='title'>
+                <div className='title m-auto'>
                     <MdDashboard className='logo'/>
-                    <h2 >Product Management Software</h2>
+                    <h2>Product Management Software</h2>
                 </div>
                 <NavLink to="#" className='notifications'>
                     <FaBell  onClick={showSideBar} size='35px'/>
                 </NavLink>
             </div>
             <nav id='navmenu' className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                <ul className='nav-menu-items'>
+                <ul className='nav-menu-items '>
                     <li className='navbar-toggle'>
                         <NavLink to="#" className='menu-close'>
                             <AiOutlineCloseCircle onClick={showSideBar}/>
