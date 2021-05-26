@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Redirect } from "react-router-dom";
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
+import Clients from './pages/Clients';
 import LoginRegister from './pages/LoginRegister';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,6 +29,17 @@ export class App extends Component {
     if(this.state.loginActive == true){
       return (
      
+        <Navbar className='navbar'>
+        
+        </Navbar>
+        
+        <Switch>
+          <Route path='/dashboard' exact component={Dashboard}/>
+          <Route path='/products' component={Products}/>
+          <Route path='/categories' />
+          <Route path='/clients' component={Clients}/>
+        </Switch>
+     </Router>
         <div>
           
        <Router>
