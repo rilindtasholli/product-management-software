@@ -28,18 +28,6 @@ export class App extends Component {
   render() {
     if(this.state.loginActive == true){
       return (
-     
-        <Navbar className='navbar'>
-        
-        </Navbar>
-        
-        <Switch>
-          <Route path='/dashboard' exact component={Dashboard}/>
-          <Route path='/products' component={Products}/>
-          <Route path='/categories' />
-          <Route path='/clients' component={Clients}/>
-        </Switch>
-     </Router>
         <div>
           
        <Router>
@@ -51,6 +39,7 @@ export class App extends Component {
             <Route path='/dashboard' exact component={Dashboard}/>
             <Route path='/products' component={Products}/>
             <Route path='/categories' />
+            <Route path='/clients' component={Clients}/>
             <Route path='/login' component={LoginRegister}/>
           </Switch>
        </Router>
