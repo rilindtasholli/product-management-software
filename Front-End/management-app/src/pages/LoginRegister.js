@@ -33,7 +33,7 @@ export class LoginRegister extends Component {
         let loginFormActive = this.state.loginFormActive ? true : false;
 
         return (
-            <div className='main-content'>
+            <div className='main-content-login'>
                 <MdDashboard className='logo'/>
                <div className='main-container'>
                     <div className='login-register-form-buttons'>
