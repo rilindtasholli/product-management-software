@@ -28,7 +28,9 @@ export class App extends Component {
     if(this.state.loginActive == true){
       return (
      
-        <div>
+     
+   <div>
+        
           
        <Router>
           <Navbar className='navbar'/>
@@ -38,12 +40,17 @@ export class App extends Component {
           <Switch>
             <Route path='/dashboard' exact component={Dashboard}/>
             <Route path='/products' component={Products}/>
+            <Route path='/clients' component={Clients}/>
             <Route path='/categories' />
             <Route path='/clients' component={Clients}/>
             <Route path='/login' component={LoginRegister}/>
           </Switch>
        </Router>
-       
+        
+        <div className="footer">
+        ©Product Management Software,2021 All rights reserved
+        </div>
+
       </div>
       )
     }else{
