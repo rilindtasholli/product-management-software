@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
-import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import ModalHeader from 'react-bootstrap/ModalHeader'
 
 export class AddClient extends Component {
   constructor(props) {
     super(props);
+    this.state={deps:[]};
   }
 
   render() {
@@ -36,12 +37,32 @@ export class AddClient extends Component {
                   </Form.Group>
 
                   <Form.Group controlId="ClientName">
+                    <Form.Label>ClientEmail</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="ClientEmail"
+                      required
+                      placeholder="ClientEmail..."
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="ClientName">
                     <Form.Label>ClientAddress</Form.Label>
                     <Form.Control
                       type="text"
                       name="ClientAddress"
                       required
                       placeholder="ClientAddress..."
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="ClientName">
+                    <Form.Label>ClientCity</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="ClientCity"
+                      required
+                      placeholder="ClientCity..."
                     />
                   </Form.Group>
 

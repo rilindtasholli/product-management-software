@@ -8,10 +8,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export class Clients extends Component {
   constructor(props) {
     super(props);
-    this.state = { addModalShow: false, editModalShow: false };
+    this.state = {deps:[], addModalShow: false, editModalShow: false };
   }
 
+  refreshList(){
+    fetch("http://localhost:5000/api/clients")
+    .then(response=>response.json())
+    .then(data=>{
+      this.setState({deps:data})
+    });
+
+  }
+
+  componentDidMount(){
+    this.refreshList();
+}
+
+componentDidUpdate(){
+    this.refreshList();
+}
+
+
   render() {
+    const {deps}=this.state;
     let addModalClose = () => this.setState({ addModalShow: false });
     let editModalClose = () => this.setState({ editModalShow: false });
     return (
@@ -37,35 +56,46 @@ export class Clients extends Component {
           </thead>
 
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Besart Ibishi</td>
-              <td>BesartIbishi@gmail.com</td>
-              <td>Rruga Shpetimi</td>
-              <td>Gilan</td>
-              <td>044-111-111</td>
+            {deps.map(cli=>
+            <tr key={cli.cli_id}>
+              <td>{cli.cli_id}</td>
+              <td>{cli.cli_name}</td>
+              <td>{cli.cli_email}</td>
+              <td>{cli.cli_address}</td>
+              <td>{cli.cli_city}</td>
+              <td>{cli.cli_phone}</td>
               <td>
                 <ButtonToolbar>
                   <Button
                     style={{ background: "#035bad", width: 60 }}
                     className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
+                    onClick={() => this.setState({ editModalShow: true,
+                    cli_id:cli.cli_id, cli_name:cli.cli_name, cli_email:cli.cli_email,
+                    cli_address:cli.cli_address, cli_city:cli.cli_city, cli_phone:cli.cli_phone  })}>
                     Edit
                   </Button>
                   <Button
                     style={{ width: 80 }}
                     variant="danger"
-
+                    onClick={()=>this.deleteCli(cli.cli_id)}
                   >
                     Delete
                   </Button>
+
                 </ButtonToolbar>
                 <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
+                  // show={this.state.editModalShow}
+                  // onHide={editModalClose}
+                  // cli_id={cli_id}
+                  // cli_name={cli_name}
+                  // cli_email={cli_email}
+                  // cli_address={cli_address}
+                  // cli_city={cli_city}
+                  // cli_phone={cli_phone}
+                  
                 />
               </td>
-            </tr>
+            </tr>)}
 
             <tr>
               <td>2</td>

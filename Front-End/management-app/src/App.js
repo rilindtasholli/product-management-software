@@ -5,9 +5,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Redirect } from "react-router-dom";
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
-import Clients from './pages/Clients';
 import LoginRegister from './pages/LoginRegister';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Clients from './pages/Clients';
 
 export class App extends Component {
   constructor(props) {
@@ -31,6 +30,7 @@ export class App extends Component {
      
      
    <div>
+        
           
        <Router>
           <Navbar className='navbar'/>
@@ -42,6 +42,7 @@ export class App extends Component {
             <Route path='/products' component={Products}/>
             <Route path='/clients' component={Clients}/>
             <Route path='/categories' />
+            <Route path='/clients' component={Clients}/>
             <Route path='/login' component={LoginRegister}/>
           </Switch>
        </Router>
