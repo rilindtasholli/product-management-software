@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
-// import ModalHeader from "react-bootstrap/esm/ModalHeader";
 
 export class EditClient extends Component {
   constructor(props) {
