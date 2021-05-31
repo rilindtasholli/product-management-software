@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
 
 
-export class EditClient extends Component {
+export class AddClient2 extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,26 +18,13 @@ export class EditClient extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Edit Client
+              Add Client
             </Modal.Title>
           </Modal.Header>
           <ModalBody>
             <Row>
               <Col sm={6}>
                 <Form onSubmit={this.handleSubmit}>
-                 
-                <Form.Group controlId="ClientId">
-                    <Form.Label>ClientId</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="ClientId"
-                      required
-                      placeholder="ClientId..."
-                      disabled
-                    />
-                  </Form.Group>
-
-                 
                   <Form.Group controlId="ClientName">
                     <Form.Label>ClientName</Form.Label>
                     <Form.Control
@@ -45,6 +32,16 @@ export class EditClient extends Component {
                       name="ClientName"
                       required
                       placeholder="ClientName..."
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="ClientName">
+                    <Form.Label>ClientEmail</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="ClientEmail"
+                      required
+                      placeholder="ClientEmail..."
                     />
                   </Form.Group>
 
@@ -59,10 +56,20 @@ export class EditClient extends Component {
                   </Form.Group>
 
                   <Form.Group controlId="ClientName">
+                    <Form.Label>ClientCity</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="ClientCity"
+                      required
+                      placeholder="ClientCity..."
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="ClientName">
                     <Form.Label>PhoneNumber</Form.Label>
                     <Form.Control
                       type="text"
-                      name="PhoneNumber"
+                      name="Payement"
                       required
                       placeholder="PhoneNumber..."
                     />
@@ -70,7 +77,7 @@ export class EditClient extends Component {
 
                   <Form.Group>
                     <Button style={{background:'#035bad'}} type="submit">
-                      Update Client
+                      Add Client
                     </Button>
                   </Form.Group>
                 </Form>
@@ -89,4 +96,4 @@ export class EditClient extends Component {
   }
 }
 
-export default EditClient;
+export default AddClient2;
