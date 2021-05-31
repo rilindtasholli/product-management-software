@@ -1,3 +1,8 @@
+*{
+  text-decoration: none;
+  outline: none;
+}
+
 .main-content{
   display: flex;
   justify-content: center;
@@ -26,7 +31,7 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  background: radial-gradient(circle, rgba(234,247,247,1) 0%, rgba(198,226,232,1) 100%);
+background-image: linear-gradient(to right bottom, #051937, #004872, #007d9e, #00b5b1, #12eba9);
   /* animation: loadMainContent ease 0.5s; */
 
 }
