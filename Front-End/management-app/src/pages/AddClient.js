@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
-import ModalHeader from 'react-bootstrap/ModalHeader'
 
 export class AddClient extends Component {
   constructor(props) {
@@ -17,11 +16,11 @@ export class AddClient extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <ModalHeader closeButton>
+          <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
               Add Client
             </Modal.Title>
-          </ModalHeader>
+          </Modal.Header>
           <ModalBody>
             <Row>
               <Col sm={6}>
