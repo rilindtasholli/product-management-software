@@ -16,7 +16,8 @@ export class Employee extends Component{
       let editModalClose = () => this.setState({editModalShow:false});
 
       return(
-         <div className="table-responsive">
+         <div className='main-content'>
+               <div className="table-responsive">
             <Table  className=" w-75 mx-auto mt-5 mw-100 table table-hover table-bordered table-stripped" size="sm">
                     <thead class="thead-light" 
                     style={{
@@ -113,6 +114,8 @@ export class Employee extends Component{
                        </ButtonToolbar>
                        </Table>
          </div>
+         </div>
+         
       );
    }
 

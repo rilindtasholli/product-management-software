@@ -3,13 +3,19 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
+  width: 90%;
+  float: right;
   animation: loadMainContent ease 0.5s;
 }
 
 .main-content-client{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  float: right;
   margin-top: 20px;
-
   
   animation: loadMainContent ease 0.5s;
 }
