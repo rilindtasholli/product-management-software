@@ -39,8 +39,8 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Employees',
-        path: '/employees',
+        title: 'Employee',
+        path: '/employee',
         icon: <BsFillPersonFill className='nav-link-icon'/>,
         cName: 'nav-text'
     },
