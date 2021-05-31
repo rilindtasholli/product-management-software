@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import LoginRegister from './pages/LoginRegister';
 import Clients from './pages/Clients';
+import Employee from './pages/Employee';
 
 export class App extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export class App extends Component {
             <Route path='/categories' />
             <Route path='/clients' component={Clients}/>
             <Route path='/login' component={LoginRegister}/>
+            <Route path='/employee' component={Employee}/>
           </Switch>
        </Router>
         
