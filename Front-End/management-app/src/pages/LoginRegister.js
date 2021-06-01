@@ -3,6 +3,7 @@ import { Button, ButtonToolbar } from "react-bootstrap";
 import {RiAccountPinCircleFill} from 'react-icons/ri';
 import {ImUserPlus} from 'react-icons/im';
 import { MdDashboard } from 'react-icons/md';
+
 import Alert from 'react-popup-alert';
 import Popup from 'reactjs-popup';
 
@@ -10,7 +11,9 @@ import './css/LoginRegister.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { AddClient } from "./AddClient";
-import { ConfirmDeleteModal } from "./modals/ConfirmDeleteModal";
+import { SuccessAlertModal } from "./modals/SuccessAlertModal";
+import { FailAlertModal } from "./modals/FailAlertModal";
+import { ConfirmAlertModal } from "./modals/ConfirmAlertModal";
 
 
 export class LoginRegister extends Component {
@@ -22,7 +25,9 @@ export class LoginRegister extends Component {
             loginFormActive: true,
             fields: {},
             errors: {},
-            addModalShow: false
+            successModalShow: false,
+            failModalShow: false,
+            confirmModalShow: false
             
         }
 
@@ -145,21 +150,17 @@ export class LoginRegister extends Component {
             })
             .then(res=>res.json())
             .then((result)=>{
-                alert(result);
-                window.location.reload();
+                this.setState({ successModalShow: true });
+                
             },
             (error)=>{
 
-                alert('Failed');
+              this.setState({ failModalShow: true });
+              
                 
             })
         }
 
-             
-            
-
-        
-        
     }
 
     changeFormLogin(){
@@ -181,7 +182,13 @@ export class LoginRegister extends Component {
     render() {
         let loginFormActive = this.state.loginFormActive ? true : false;
        
-        let addModalClose = () => this.setState({ addModalShow: false });
+        let successModalClose = () => {
+          this.setState({ successModalShow: false });
+          window.location.reload();
+        }
+
+        let failModalClose = () => this.setState({ failModalShow: false });
+        let confirmModalClose = () => this.setState({ confirmModalShow: false });
 
         return (
             <div className='main-content-login'>
@@ -240,14 +247,29 @@ export class LoginRegister extends Component {
                             <ButtonToolbar className="add-button">
           <Button
             style={{background:'#035bad'}}
-            onClick={() => this.setState({ addModalShow: true })}
+            onClick={() => this.setState({ confirmModalShow: true })}
           >
-            Add Client
+            Show Alert
           </Button>
-          <AddClient
-            show={this.state.addModalShow}
-            onHide={addModalClose}
-          ></AddClient>
+
+          <ConfirmAlertModal
+            show={this.state.confirmModalShow}
+            onHide={confirmModalClose}
+            message='are you sure?'
+          ></ConfirmAlertModal>
+
+          <SuccessAlertModal
+            show={this.state.successModalShow}
+            onHide={successModalClose}
+            message='Registered Succesfully!'
+          ></SuccessAlertModal>
+
+          <FailAlertModal
+            show={this.state.failModalShow}
+            onHide={failModalClose}
+            message='Registration Failed!'
+          ></FailAlertModal>
+
         </ButtonToolbar>
                         </div>
                     </div>
