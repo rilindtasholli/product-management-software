@@ -25,10 +25,7 @@ export class LoginRegister extends Component {
         })
     }
 
-    // handleLoginClick(){
-    //     this.props.handler
-    // }
-
+  
     render() {
         let loginFormActive = this.state.loginFormActive ? true : false;
 

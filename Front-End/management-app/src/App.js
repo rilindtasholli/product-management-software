@@ -7,7 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import LoginRegister from './pages/LoginRegister';
 import Clients from './pages/Clients';
-import Employee from './pages/Employee';
+import Suppliers from './pages/Suppliers';
+
 
 export class App extends Component {
   constructor(props) {
@@ -29,7 +30,9 @@ export class App extends Component {
     if(this.state.loginActive == true){
       return (
      
-        <div>
+     
+   <div>
+        
           
        <Router>
           <Navbar className='navbar'/>
@@ -39,13 +42,19 @@ export class App extends Component {
           <Switch>
             <Route path='/dashboard' exact component={Dashboard}/>
             <Route path='/products' component={Products}/>
+            <Route path='/clients' component={Clients}/>
             <Route path='/categories' />
             <Route path='/clients' component={Clients}/>
             <Route path='/login' component={LoginRegister}/>
-            <Route path='/employee' component={Employee}/>
+            <Route path='/Suppliers'component={Suppliers}/>
+          
           </Switch>
        </Router>
-       
+        
+        <div className="footer">
+        ©Product Management Software,2021 All rights reserved
+        </div>
+
       </div>
       )
     }else{
