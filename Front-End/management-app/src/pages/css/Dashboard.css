@@ -1,7 +1,6 @@
 .main-div{
     display: flex;
     flex-direction: column;
-    width: 90%;
     justify-content: center;
     align-items: center;
 }
@@ -100,6 +99,7 @@
     align-items: center;
     justify-content: center;
     margin: 25px 0;
+    margin-bottom: 50px;
     width: 900px;
 }
 

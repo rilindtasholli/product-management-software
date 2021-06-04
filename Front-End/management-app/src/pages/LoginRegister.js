@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import { Button, ButtonToolbar } from "react-bootstrap";
+// import { Button, ButtonToolbar } from "react-bootstrap";
 import {RiAccountPinCircleFill} from 'react-icons/ri';
 import {ImUserPlus} from 'react-icons/im';
 import { MdDashboard } from 'react-icons/md';
-
-import Alert from 'react-popup-alert';
-import Popup from 'reactjs-popup';
-
 import './css/LoginRegister.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { AddClient } from "./AddClient";
-import { SuccessAlertModal } from "./modals/SuccessAlertModal";
-import { FailAlertModal } from "./modals/FailAlertModal";
-import { ConfirmAlertModal } from "./modals/ConfirmAlertModal";
+import { SuccessAlertModal } from "./modals/SuccessAlert";
+import { FailAlertModal } from "./modals/FailAlert";
+// import { ConfirmAlertModal } from "./modals/ConfirmAlert";
 
 
 export class LoginRegister extends Component {
@@ -27,8 +21,6 @@ export class LoginRegister extends Component {
             errors: {},
             successModalShow: false,
             failModalShow: false,
-            confirmModalShow: false
-            
         }
 
         this.handleRegister=this.handleRegister.bind(this);
@@ -175,12 +167,10 @@ export class LoginRegister extends Component {
         })
     }
 
-    // handleLoginClick(){
-    //     this.props.handler
-    // }
+
 
     render() {
-        let loginFormActive = this.state.loginFormActive ? true : false;
+        let loginFormActive = this.state.loginFormActive;
        
         let successModalClose = () => {
           this.setState({ successModalShow: false });
@@ -188,7 +178,6 @@ export class LoginRegister extends Component {
         }
 
         let failModalClose = () => this.setState({ failModalShow: false });
-        let confirmModalClose = () => this.setState({ confirmModalShow: false });
 
         return (
             <div className='main-content-login'>
@@ -244,19 +233,21 @@ export class LoginRegister extends Component {
 
         
                             </form>
-                            <ButtonToolbar className="add-button">
-          <Button
-            style={{background:'#035bad'}}
-            onClick={() => this.setState({ confirmModalShow: true })}
-          >
-            Show Alert
-          </Button>
 
-          <ConfirmAlertModal
+          {/* <ButtonToolbar className="add-button">
+            <Button
+              style={{background:'#035bad'}}
+              onClick={() => this.setState({ confirmModalShow: true })}
+            >
+              Show Alert
+            </Button>
+          </ButtonToolbar> */}
+
+          {/* <ConfirmAlertModal
             show={this.state.confirmModalShow}
             onHide={confirmModalClose}
             message='are you sure?'
-          ></ConfirmAlertModal>
+          ></ConfirmAlertModal> */}
 
           <SuccessAlertModal
             show={this.state.successModalShow}
@@ -270,7 +261,7 @@ export class LoginRegister extends Component {
             message='Registration Failed!'
           ></FailAlertModal>
 
-        </ButtonToolbar>
+        
                         </div>
                     </div>
                </div>
