@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Table, Button, ButtonToolbar } from "react-bootstrap";
-import { AddClient } from "./AddClient";
+import { AddClient } from "./modals/AddClient";
 import "./css/Clients.css";
-import { EditClient } from "./EditClient";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { EditClient } from "./modals/EditClient";
+
 
 export class Clients extends Component {
   constructor(props) {
@@ -260,8 +260,7 @@ componentDidUpdate(){
           <Button
             style={{background:'#035bad'}}
             onClick={() => this.setState({ addModalShow: true })}
-          >
-            Add Client
+          >Add Client
           </Button>
           <AddClient
             show={this.state.addModalShow}
