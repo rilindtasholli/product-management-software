@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { GiPieChart } from 'react-icons/gi';
+import { FaChartLine } from 'react-icons/fa';
 import PieChart from '../components/charts/PieChart';
 import LineChart from '../components/charts/LineChart';
+import { Table, Button, ButtonToolbar } from "react-bootstrap";
 import './css/Dashboard.css';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export class Dashboard extends Component {
@@ -11,8 +13,9 @@ export class Dashboard extends Component {
     render() {
 
         return (
-            <div className='main-content'>
-                <div>
+            
+            <div className='main-content-dashboard'>
+                <div className='main-div'>
                     <div className='sales-activity'>
                         <h1 className='activity-container-title' >Sales Activity</h1>
                         <div className='sales-items'>
@@ -47,173 +50,80 @@ export class Dashboard extends Component {
                             <PieChart/>
                         </div>
                         </div>
+
+                        
                     </div>
+                    <a onClick={() => this.props.history.push('/reports')} className='show-more-button'>Show More <GiPieChart/></a>
                     
-                   
+                    <div className='recent-sales-section'>
+                    <h1 className='recent-sales-container-title' >Recent Sales</h1>
+                        <div className='recent-sales-table'>
+                            <Table className=" m-auto  font-weight-bold" striped  >
+                                <thead
+                                    style={{
+                                    background: "rgb(32, 72, 110)",
+                                    color: "white",
+                                    }}
+                                >
+                                    <tr>
+                                    <th>Sale ID</th>
+                                    <th>Client Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Date</th>
+                                    <th>Total Price</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                    <td>68</td>
+                                    <td>Filan Fisteki</td>
+                                    <td>044-000-000</td>
+                                    <td>04-05-2021</td>
+                                    <td>$53.39</td>
+                                    </tr>
+
+                                    <tr>
+                                    <td>67</td>
+                                    <td>Nuredin Nuredini</td>
+                                    <td>044-100-100</td>
+                                    <td>01-05-2021</td>
+                                    <td>$102.00</td>
+                                    </tr>
+
+                                    <tr>
+                                    <td>66</td>
+                                    <td>Filane Fisteki</td>
+                                    <td>044-200-200</td>
+                                    <td>28-04-2021</td>
+                                    <td>$88.55</td>
+                                    </tr>
+
+                                    <tr>
+                                    <td>65</td>
+                                    <td>Ramadan Ramadani</td>
+                                    <td>044-300-300</td>
+                                    <td>21-04-2021</td>
+                                    <td>$32.59</td>
+                                    </tr>
+                                    
+
+                                </tbody>
+                            </Table>
+                            
+                        </div>    
+                        <a onClick={() => this.props.history.push('/sales')} className='show-more-button'>Show More <FaChartLine/></a>
+                    </div>
+
+
                 </div>
                 {/* <div className='account-data'>
                     
                 </div> */}
-                <div className="recent-sales-container">
-
-                <div className="recent-sales">
-
-                   <div className="recent-sales-details">
-                       
-                       <ul className="details">
-                       <p className="recent-title">Recent Sales</p>
-                       <li class="topic">Date</li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                       </ul>
-
-                   </div>
-
-                   <div className="recent-sales-details">
-                       
-                   <ul class="details">
-                    <li class="topic">Customer</li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                    <li><a href="#">Filan Fisteki</a></li>
-                </ul>
-
-                   </div>
-
-                   
-                   <div className="recent-sales-details">
-                       
-                   <ul class="details">
-                    <li class="topic">Sales</li>
-                    <li><a href="#">Delivered</a></li>
-                    <li><a href="#">Pending</a></li>
-                    <li><a href="#">Returned</a></li>
-                    <li><a href="#">Delivered</a></li>
-                    <li><a href="#">Pending</a></li>
-                    <li><a href="#">Returned</a></li>
-                    <li><a href="#">Delivered</a></li>
-                    <li><a href="#">Pending</a></li>
-                    <li><a href="#">Delivered</a></li>
-                </ul>
                 
-
-                   </div>
-
-                   <div className="recent-sales-details">
-                       
-                        <ul class="details">
-                            <li class="topic">Total</li>
-                            <li><a href="#">$204.98</a></li>
-                            <li><a href="#">$24.55</a></li>
-                            <li><a href="#">$25.88</a></li>
-                            <li><a href="#">$170.66</a></li>
-                            <li><a href="#">$56.56</a></li>
-                            <li><a href="#">$44.95</a></li>
-                            <li><a href="#">$67.33</a></li>
-                            <li><a href="#">$23.53</a></li>
-                            <li><a href="#">$46.52</a></li>
-                        </ul>
-                            
-    
-                       </div>
-
-            
-                </div>
-                
-                <div className="top-selling-products">
-
-                    <ul className="top-sales-details">
-                        <p className="top-products-title">Top Selling Products</p>
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 1</span>
-                            </a>
-                            <span className="price">$1107</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 2</span>
-                            </a>
-                            <span className="price">$107</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 3</span>
-                            </a>
-                            <span className="price">$243</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 4</span>
-                            </a>
-                            <span className="price">$453</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 5</span>
-                            </a>
-                            <span className="price">$24</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 6</span>
-                            </a>
-                            <span className="price">$545</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 7</span>
-                            </a>
-                            <span className="price">$66</span>
-                        </li>
-
-                        <li>
-                            <a>
-                            <img className="images" src="" alt=""/>
-                                    <span className="product"> Produkti 8</span>
-                            </a>
-                            <span className="price">$124</span>
-                        </li> 
-
-                    </ul>
-
-                    
-
-
-                    </div>
-                        
-          
-
-
-                    </div>
-
-                    
-         
               
+                    
+                    
             </div> 
         )
     }

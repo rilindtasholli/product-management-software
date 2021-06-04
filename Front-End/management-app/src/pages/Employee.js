@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React, { Component } from 'react'
 import { Table, Button, ButtonToolbar } from "react-bootstrap";
-import {EditEmployee} from "./EditEmployee";
-import {AddEmployee} from "./AddEmployee";
+import {EditEmployee} from "./modals/EditEmployee";
+import {AddEmployee} from "./modals/AddEmployee";
 //import "./css/Employee.css"
 
 export class Employee extends Component{
@@ -16,7 +16,8 @@ export class Employee extends Component{
       let editModalClose = () => this.setState({editModalShow:false});
 
       return(
-         <div className="table-responsive">
+         <div className='main-content'>
+               <div className="table-responsive">
             <Table  className=" w-75 mx-auto mt-5 mw-100 table table-hover table-bordered table-stripped" size="sm">
                     <thead class="thead-light" 
                     style={{
@@ -104,7 +105,7 @@ export class Employee extends Component{
                        </tr>
                        </tbody>
                        <ButtonToolbar className="add-button">
-                          <Button id="add"style={{marginTop:'3px'}}
+                          <Button id="add" style={{marginTop:'3px'}}
                           onClick={() => this.setState({addModalShow:true})}>
                           Add Employee
                           </Button>
@@ -113,8 +114,12 @@ export class Employee extends Component{
                        </ButtonToolbar>
                        </Table>
          </div>
+         </div>
+         
       );
    }
 
 }
+
+
 export default Employee

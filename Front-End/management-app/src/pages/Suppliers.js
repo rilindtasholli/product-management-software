@@ -2,8 +2,8 @@ import React,{Component} from 'react';
 import {Table} from 'react-bootstrap';
 
 import {Button,ButtonToolbar} from 'react-bootstrap';
-import {AddSuppModal} from './AddSuppModal';
-import {EditSuppModal} from './EditSuppModal';
+import {AddSupplier} from './modals/AddSupplier';
+import {EditSupplier} from './modals/EditSupplier';
 
 
 
@@ -45,7 +45,7 @@ export class Suppliers extends Component{
         let addModalClose=()=>this.setState({addModalShow:false});
         let editModalClose=()=>this.setState({editModalShow:false});
         return(
-            <div className="main-content-suppliers">
+            <div className="main-content">
               <Table className=" w-75 m-auto  font-weight-bold" striped  size="md">
                    
                     <thead
@@ -89,7 +89,7 @@ export class Suppliers extends Component{
                     Delete
                   </Button>
                 </ButtonToolbar>
-              <EditSuppModal
+              <EditSupplier
                   show={this.state.editModalShow}
                   onHide={editModalClose}
                 />
@@ -117,7 +117,7 @@ export class Suppliers extends Component{
             Delete
         </Button>
 
-        <EditSuppModal show={this.state.editModalShow}
+        <EditSupplier show={this.state.editModalShow}
         onHide={editModalClose}
         SupplierId={SupplierId}
       SupplierName={SupplierName}
@@ -142,7 +142,7 @@ export class Suppliers extends Component{
                     Add Supplier
                     </Button>
                  
-                    <AddSuppModal  show={this.state.addModalShow}
+                    <AddSupplier  show={this.state.addModalShow}
                     onHide={addModalClose}/>
                 
                 </ButtonToolbar>

@@ -1,5 +1,9 @@
-Front-End/management-app/node_modules/
 
+#packages
+package.json
+package-lock.json
+
+Front-End/management-app/node_modules/
 Front-End/management-app/package-lock.json
 Front-End/management-app/package.json
 
