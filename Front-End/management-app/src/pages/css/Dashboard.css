@@ -1,11 +1,17 @@
+.main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .sales-activity{
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
+    margin: 20px 0;
 }
 
 .activity-container-title{
-    margin: 0 110px;
+    margin: 0 25px;
     color: rgb(24, 24, 24);
     font-size: 25px;
     font-weight:600;
@@ -19,6 +25,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    
 }
 
 .sales-item{
@@ -34,6 +41,7 @@
     border-radius: 10px;
     margin: 10px 20px;
     box-shadow: 0px 0px 3px 2px rgb(60, 60, 60, 0.8);
+    
 }
 
 .item-data{
@@ -53,7 +61,7 @@
     /* border: solid 1px blue; */
     display: flex;
     flex-direction: row;
-    max-width: 900px;
+    
 }
 
 .charts-container-title{
@@ -80,3 +88,55 @@
 /* .account-data{
     border: solid 2px blue;
 } */
+
+.recent-sales-section{
+    /* border: solid 1px blue; */
+    background-color: rgb(233, 233, 233);
+    box-shadow: 0px 0px 3px 2px rgb(60, 60, 60, 0.8);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.recent-sales-table{
+    width: 100%;
+}
+
+.recent-sales-container-title{
+    margin: 10px 0;
+    color: rgb(24, 24, 24);
+    font-size: 22px;
+    font-weight:600;
+}
+
+.show-more-button{
+    padding: 10px 12px;
+    margin: 10px 0;
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(30, 116, 155);
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.show-more-button:hover{
+    padding: 10px 12px;
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(23, 89, 119);
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+.show-more-button:active{
+    background-color: rgb(19, 71, 95);
+    transform: scale(0.95);
+    transition: 0s;
+
+}
