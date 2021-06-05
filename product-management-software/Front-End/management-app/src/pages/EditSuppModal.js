@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
-import {Modal,Button, Row, Col, Form,Image} from 'react-bootstrap';
+import {Modal,Button, Row, Col, Form} from 'react-bootstrap';
 
 export class EditSuppModal extends Component{
     constructor(props){
         super(props);
-        this.state={deps:[]};
+        this.state={sups:[]};
         this.handleSubmit=this.handleSubmit.bind(this);
       
     }
@@ -14,7 +14,7 @@ export class EditSuppModal extends Component{
         fetch(process.env.REACT_APP_API)
         .then(response=>response.json())
         .then(data=>{
-            this.setState({deps:data});
+            this.setState({sups:data});
         });
     }
 
@@ -27,10 +27,9 @@ export class EditSuppModal extends Component{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                ID:event.target.SupplierID.value,
-                EmriiKompanise:event.target.EmriiKompanise.value,
+                sup_id:event.target.sup_id.value,
+                SupplierName:event.target.SupplierName.value,
             
-                DataeFurnizimit:event.target.DataeFurnizimit.value,
             
 
             })

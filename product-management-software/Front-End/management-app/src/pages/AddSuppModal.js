@@ -4,7 +4,7 @@ import {Modal,Button, Row, Col, Form} from 'react-bootstrap';
 export class AddSuppModal extends Component{
     constructor(props){
         super(props);
-        this.state={deps:[]};
+        this.state={sups:[]};
         this.handleSubmit=this.handleSubmit.bind(this);
    
     }
@@ -15,13 +15,13 @@ export class AddSuppModal extends Component{
         fetch(process.env.REACT_APP_API)
         .then(response=>response.json())
         .then(data=>{
-            this.setState({deps:data});
+            this.setState({sups:data});
         });
     }
 
     handleSubmit(event){
         event.preventDefault();
-        fetch(process.env.REACT_APP_API+'Supplier',{
+        fetch(process.env.REACT_APP_API+'Suppliers',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -29,9 +29,9 @@ export class AddSuppModal extends Component{
             },
             body:JSON.stringify({
               
-            EmriiKompanise:event.target.EmriiKompanise.value,
+            Suppliersname:event.target.Suppliersname.value,
               
-                DataeFurnizimit:event.target.DataeFurnizimit.value,
+                
               
 
             })
