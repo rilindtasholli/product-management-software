@@ -1,35 +1,47 @@
 import React,{Component} from 'react';
 import {Modal,Button, Row, Col, Form,Image} from 'react-bootstrap';
+import { SuccessAlertModal } from "./SuccessAlertModal";
+import { FailAlertModal } from "./FailAlertModal";
 
-export class EditEmployee extends Component{
+export class AddEmployee extends Component{
     constructor(props){
         super(props);
-        this.state={deps:[]};
+        //this.state={deps:[]};
         this.handleSubmit=this.handleSubmit.bind(this);
-        //this.handleFileSelected=this.handleFileSelected.bind(this);
+        this.state = {
+            // loginFormActive: true,
+            // fields: {},
+            // errors: {},
+            successModalShow: false,
+            failModalShow: false,
+            // confirmModalShow: false
+            
+        }
+        // this.handleFileSelected=this.handleFileSelected.bind(this);
     }
 
     // photofilename = "upload.png";
     // imagesrc = 'https://localhost:5001/Photos/'+this.photofilename;
-
-    // componentDidMount(){
-    //     fetch('https://localhost:5001/api/departament')
-    //     .then(response=>response.json())
-    //     .then(data=>{
-    //         this.setState({deps:data});
-    //     });
-    // }
+/* 
+    componentDidMount(){
+        fetch('https://localhost:5001/api/departament')
+        .then(response=>response.json())
+        .then(data=>{
+            this.setState({deps:data});
+        });
+    } */
 
     handleSubmit(event){
         event.preventDefault();
         fetch('https://localhost:5001/api/employee',{
-            method:'PUT',
+            method:'POST',
             headers:{
                 'Accept':'application/json',
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                Emp_id:event.target.Emp_id.value,
+                //Employee_ID:null,
+                Emp_id:event.target.Emp_id.v,
                 Emp_name:event.target.Emp_name.value,
                 Emp_phone:event.target.Emp_phone.value,
                 Emp_email:event.target.Emp_email.value,
@@ -39,11 +51,13 @@ export class EditEmployee extends Component{
             })
         })
         .then(res=>res.json())
-        .then((result)=>{
-            alert(result);
-        },
+            .then((result)=>{
+                this.setState({ successModalShow: true });
+                
+            },
         (error)=>{
-            alert('Failed');
+            this.setState({ failModalShow: true });
+          
         })
     }
 
@@ -73,6 +87,12 @@ export class EditEmployee extends Component{
     // }
 
     render(){
+        let successModalClose = () => {
+            this.setState({ successModalShow: false });
+            window.location.reload();
+          }
+  
+          let failModalClose = () => this.setState({ failModalShow: false });
         return (
             <div className="container">
 
@@ -84,7 +104,7 @@ centered
 >
     <Modal.Header clooseButton>
         <Modal.Title id="contained-modal-title-vcenter">
-            Edit Employee
+            Add Employee
         </Modal.Title>
     </Modal.Header>
     <Modal.Body>
@@ -92,60 +112,71 @@ centered
         <Row>
             <Col sm={6}>
                 <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="Emp_id">
-                        <Form.Label>ID</Form.Label>
-                        <Form.Control type="number" name="Emp_id" required 
-                        placeholder="Emp_id"
-                        disabled
-                        defaultValue={this.props.empid}/>
+                <Form.Group controlId="Emp_name">
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        name="Emp_name" 
+                        required 
+                        placeholder="Enter employee's full name"
+                        />
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_name">
-                        <Form.Label>Full Name</Form.Label>
-                        <Form.Control type="text" name="Emp_name" required 
-                        defaultValue={this.props.empname}
-                        placeholder="Employee's full name"/>
-                    </Form.Group>
 
                     <Form.Group controlId="Emp_phone">
                         <Form.Label>Phone Number</Form.Label>
-                        <Form.Control type="text" name="Emp_phone" required 
-                        defaultValue={this.props.emppphone}
-                        placeholder="Employee's phone number"/>
+                        <Form.Control 
+                        type="text" 
+                        name="Emp_phone" required 
+                        placeholder="Enter employee's phone number"
+                        
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="Emp_email">
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control type="mail" name="Emp_email" required 
-                        defaultValue={this.props.empemail}
-                        placeholder="Employee's email address"/>
+                        <Form.Control 
+                        type="text" 
+                        name="Emp_email" 
+                        placeholder="Enter employee's email"
+                        
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="Emp_hourly_wage">
                         <Form.Label>Hourly Wage</Form.Label>
-                        <Form.Control type="text" name="Emp_hourly_wage" required 
-                        defaultValue={this.props.emphw}
-                        placeholder="Hourly Wage"/>
+                        <Form.Control 
+                        type="text" 
+                        name="Emp_hourly_wage" required 
+                        placeholder="Enter employee's hourly wage"
+                        
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="Emp_hours">
                         <Form.Label>Hours</Form.Label>
-                        <Form.Control type="text" name="Emp_hours" required 
-                        defaultValue={this.props.emph}
-                        placeholder="Employee's working hours"/>
+                        <Form.Control 
+                        type="text" 
+                        name="Emp_hours" required 
+                        placeholder="Enter employee's working hours"
+                        
+                        />
                     </Form.Group>
-
                     <Form.Group>
-                        <Button variant="primary" type="submit">
-                            Update Employee
+                        <Button variant="primary" type="submit" onClick={() => this.setState({ successModalShow: true })}>
+                            Add Employee
                         </Button>
+                        <SuccessAlertModal
+            show={this.state.successModalShow}
+            onHide={successModalClose}
+            message='Added Succesfully!'
+          ></SuccessAlertModal>
                     </Form.Group>
                 </Form>
             </Col>
 
             {/* <Col sm={6}>
-                <Image width="200px" height="200px" 
-                src={'https://localhost:5001/Photos/'+this.props.photofilename}/>
+                <Image width="200px" height="200px" src={this.imagesrc}/>
                 <input onChange={this.handleFileSelected} type="File"/>
             </Col> */}
         </Row>
@@ -161,5 +192,4 @@ centered
         )
     }
 
-}
-export default EditEmployee;
+}export default AddEmployee

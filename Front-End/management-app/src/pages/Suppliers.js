@@ -45,10 +45,10 @@ export class Suppliers extends Component{
         let addModalClose=()=>this.setState({addModalShow:false});
         let editModalClose=()=>this.setState({editModalShow:false});
         return(
-            <div className="main-content-suppliers" className="table">
+            <div className="main-content-suppliers">
               <Table className=" w-75 m-auto  font-weight-bold" striped  size="md">
                    
-                    <thead 
+                    <thead
             style={{
               background: "	#002e58",
               color: "white",

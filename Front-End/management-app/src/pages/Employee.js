@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import {Table} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
-import {AddEmployee} from './AddEmployee';
-import {EditEmployee} from './EditEmployee';
+import {AddEmployee} from './modals/AddEmployee';
+import {EditEmployee} from './modals/EditEmployee';
 import './css/Employee.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -88,7 +88,7 @@ export class Employee extends Component{
                             </tr>)}
                     </tbody>
                 </Table>
-                <ButtonToolbar>
+                <ButtonToolbar className="ml-5">
                     <Button variant='primary'
                     onClick={()=>this.setState({addModalShow:true})}>
                     Add Employee</Button>
