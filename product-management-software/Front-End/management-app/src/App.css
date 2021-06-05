@@ -1,0 +1,38 @@
+.main-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  animation: loadMainContent ease 0.5s;
+}
+
+.main-content-client{
+  margin-top: 20px;
+
+  
+  animation: loadMainContent ease 0.5s;
+}
+
+.main-content-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(234,247,247,1) 0%, rgba(198,226,232,1) 100%);
+  /* animation: loadMainContent ease 0.5s; */
+
+}
+
+@keyframes loadMainContent{
+  0%{
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
