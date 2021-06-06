@@ -1,17 +1,36 @@
 import React, { Component } from "react";
 import { Table, Button, ButtonToolbar } from "react-bootstrap";
-import { AddClient } from "./AddClient";
+import { AddClient } from "./modals/AddClient";
 import "./css/Clients.css";
-import { EditClient } from "./EditClient";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { EditClient } from "./modals/EditClient";
+
 
 export class Clients extends Component {
   constructor(props) {
     super(props);
-    this.state = { addModalShow: false, editModalShow: false };
+    this.state = {deps:[], addModalShow: false, editModalShow: false };
   }
 
+  refreshList(){
+    fetch("http://localhost:5000/api/clients")
+    .then(response=>response.json())
+    .then(data=>{
+      this.setState({deps:data})
+    });
+
+  }
+
+  componentDidMount(){
+    this.refreshList();
+}
+
+componentDidUpdate(){
+    this.refreshList();
+}
+
+
   render() {
+    const {deps}=this.state;
     let addModalClose = () => this.setState({ addModalShow: false });
     let editModalClose = () => this.setState({ editModalShow: false });
     return (
@@ -28,44 +47,61 @@ export class Clients extends Component {
             <tr>
               <th>ClientId</th>
               <th>ClientName</th>
+              <th>ClientEmail</th>
               <th>ClientAddress</th>
+              <th>ClientCity</th>
               <th>PhoneNumber</th>
               <th style={{ width: 250 }}>Options</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Besart Ibishi</td>
-              <td>Gilan</td>
-              <td>044-111-111</td>
+            {deps.map(cli=>
+            <tr key={cli.cli_id}>
+              <td>{cli.cli_id}</td>
+              <td>{cli.cli_name}</td>
+              <td>{cli.cli_email}</td>
+              <td>{cli.cli_address}</td>
+              <td>{cli.cli_city}</td>
+              <td>{cli.cli_phone}</td>
               <td>
                 <ButtonToolbar>
                   <Button
                     style={{ background: "#035bad", width: 60 }}
                     className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
+                    onClick={() => this.setState({ editModalShow: true,
+                    cli_id:cli.cli_id, cli_name:cli.cli_name, cli_email:cli.cli_email,
+                    cli_address:cli.cli_address, cli_city:cli.cli_city, cli_phone:cli.cli_phone  })}>
                     Edit
                   </Button>
                   <Button
                     style={{ width: 80 }}
                     variant="danger"
-
+                    onClick={()=>this.deleteCli(cli.cli_id)}
                   >
                     Delete
                   </Button>
+
                 </ButtonToolbar>
                 <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
+                  // show={this.state.editModalShow}
+                  // onHide={editModalClose}
+                  // cli_id={cli_id}
+                  // cli_name={cli_name}
+                  // cli_email={cli_email}
+                  // cli_address={cli_address}
+                  // cli_city={cli_city}
+                  // cli_phone={cli_phone}
+                  
                 />
               </td>
-            </tr>
+            </tr>)}
 
             <tr>
               <td>2</td>
               <td>Rilind Tasholli</td>
+              <td>RilindTasholli@gmail.com</td>
+              <td>Adresa</td>
               <td>Lipjan</td>
               <td>044-222-222</td>
               <td>
@@ -94,6 +130,8 @@ export class Clients extends Component {
             <tr>
               <td>3</td>
               <td>Gresa Shala</td>
+              <td>Gresashala@gmail.com</td>
+              <td>Rruga...</td>
               <td>Prizren</td>
               <td>044-333-333</td>
               <td>
@@ -124,6 +162,8 @@ export class Clients extends Component {
             <tr>
               <td>4</td>
               <td>Ernise Sallahu</td>
+              <td>Ernisesallahu@gmail.com</td>
+              <td>Rruga</td>
               <td>Gjakove</td>
               <td>044-444-444</td>
               <td>
@@ -154,6 +194,8 @@ export class Clients extends Component {
             <tr>
               <td>5</td>
               <td>Blenda Molliqaj</td>
+              <td>Blendamolliqaj@gmail.com</td>
+              <td>Rruga</td>
               <td>Deçan</td>
               <td>044-555-555</td>
               <td>
@@ -184,6 +226,8 @@ export class Clients extends Component {
             <tr>
               <td>6</td>
               <td>Lani Zymberi</td>
+              <td>Lanizymberi@gmail.com</td>
+              <td>Rruga...</td>
               <td>Drenas</td>
               <td>044-666-666</td>
               <td>
@@ -216,8 +260,7 @@ export class Clients extends Component {
           <Button
             style={{background:'#035bad'}}
             onClick={() => this.setState({ addModalShow: true })}
-          >
-            Add Client
+          >Add Client
           </Button>
           <AddClient
             show={this.state.addModalShow}

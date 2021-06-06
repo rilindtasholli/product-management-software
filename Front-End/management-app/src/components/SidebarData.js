@@ -1,6 +1,6 @@
 import React from 'react'
-import { FaBars } from 'react-icons/fa';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+// import { FaBars } from 'react-icons/fa';
+// import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { AiFillDashboard } from 'react-icons/ai';
 import { FiPackage } from 'react-icons/fi';
 import { AiFillAppstore } from 'react-icons/ai';
@@ -39,8 +39,8 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Employees',
-        path: '/employees',
+        title: 'Employee',
+        path: '/employee',
         icon: <BsFillPersonFill className='nav-link-icon'/>,
         cName: 'nav-text'
     },

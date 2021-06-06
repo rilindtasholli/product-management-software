@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
-import ModalHeader from "react-bootstrap/esm/ModalHeader";
+
 
 export class EditClient extends Component {
   constructor(props) {
@@ -16,11 +16,11 @@ export class EditClient extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <ModalHeader closeButton>
+          <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
               Edit Client
             </Modal.Title>
-          </ModalHeader>
+          </Modal.Header>
           <ModalBody>
             <Row>
               <Col sm={6}>
