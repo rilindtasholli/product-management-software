@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Modal,Button, Row, Col, Form,Image} from 'react-bootstrap';
-import { SuccessAlertModal } from "./SuccessAlertModal";
-import { FailAlertModal } from "./FailAlertModal";
+import { SuccessAlert } from "./SuccessAlert";
+import { FailAlert } from "./FailAlert";
 
 export class AddEmployee extends Component{
     constructor(props){
@@ -21,77 +21,47 @@ export class AddEmployee extends Component{
         // this.handleFileSelected=this.handleFileSelected.bind(this);
     }
 
-    // photofilename = "upload.png";
-    // imagesrc = 'https://localhost:5001/Photos/'+this.photofilename;
-/* 
-    componentDidMount(){
-        fetch('https://localhost:5001/api/departament')
-        .then(response=>response.json())
-        .then(data=>{
-            this.setState({deps:data});
-        });
-    } */
+
+
+    
 
     handleSubmit(event){
         event.preventDefault();
-        fetch('https://localhost:5001/api/employee',{
+        fetch('http://localhost:5000/api/employee',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                //Employee_ID:null,
-                //Emp_id:null,
-                Emp_name:event.target.Emp_name.value,
-                Emp_phone:event.target.Emp_phone.value,
-                Emp_email:event.target.Emp_email.value,
-                Emp_hourly_wage:event.target.Emp_hourly_wage.value,
-                Emp_hours:event.target.Emp_hours.value
-
+                emp_name: event.target.emp_name.value,
+                emp_phone: event.target.emp_phone.value,
+                emp_email: event.target.emp_email.value,
+                emp_hourly_wage: event.target.emp_hourly_wage.value,
+                emp_hours: event.target.emp_hours.value
             })
+            
         })
         .then(res=>res.json())
-            .then((result)=>{
-                this.setState({ alertMessage:"Success",successModalShow: true });
-                
-            },
-        (error)=>{
-            this.setState({ alertMessage:"Failed",failModalShow: true});
+        .then((result)=>{
+           
+            this.setState({ alertMessage:"Added Successfully!",successModalShow: true });
             
-          
+        },
+        (error)=>{
+            this.setState({ alertMessage:"Add Failed!", failModalShow: true});
+            
+        
         })
+        
     }
 
 
-    // handleFileSelected(event){
-    //     event.preventDefault();
-    //     this.photofilename=event.target.files[0].name;
-    //     const formData = new FormData();
-    //     formData.append(
-    //         "myFile",
-    //         event.target.files[0],
-    //         event.target.files[0].name
-    //     );
-
-    //     fetch('https://localhost:5001/api/Employee/SaveFile',{
-    //         method:'POST',
-    //         body:formData
-    //     })
-    //     .then(res=>res.json())
-    //     .then((result)=>{
-    //         this.imagesrc='https://localhost:5001/Photos/'+result;
-    //     },
-    //     (error)=>{
-    //         alert('Failed');
-    //     })
-        
-    // }
 
     render(){
         let successModalClose = () => {
             this.setState({ successModalShow: false });
-            //window.location.reload();
+            this.props.onHide(true);
           }
   
           let failModalClose = () => this.setState({ failModalShow: false });
@@ -114,52 +84,52 @@ centered
         <Row>
             <Col sm={6}>
                 <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="Emp_name">
+                <Form.Group controlId="emp_name">
                         <Form.Label>Full Name</Form.Label>
                         <Form.Control 
                         type="text" 
-                        name="Emp_name" 
+                        name="emp_name" 
                         required 
                         placeholder="Enter employee's full name"
                         />
                     </Form.Group>
 
 
-                    <Form.Group controlId="Emp_phone">
+                    <Form.Group controlId="emp_phone">
                         <Form.Label>Phone Number</Form.Label>
                         <Form.Control 
                         type="text" 
-                        name="Emp_phone" required 
+                        name="emp_phone" required 
                         placeholder="Enter employee's phone number"
                         
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_email">
+                    <Form.Group controlId="emp_email">
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control 
                         type="text" 
-                        name="Emp_email" 
+                        name="emp_email" 
                         placeholder="Enter employee's email"
                         
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_hourly_wage">
+                    <Form.Group controlId="emp_hourly_wage">
                         <Form.Label>Hourly Wage</Form.Label>
                         <Form.Control 
                         type="text" 
-                        name="Emp_hourly_wage" required 
+                        name="emp_hourly_wage" required 
                         placeholder="Enter employee's hourly wage"
                         
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_hours">
+                    <Form.Group controlId="emp_hours">
                         <Form.Label>Hours</Form.Label>
                         <Form.Control 
                         type="text" 
-                        name="Emp_hours" required 
+                        name="emp_hours" required 
                         placeholder="Enter employee's working hours"
                         
                         />
@@ -168,16 +138,16 @@ centered
                         <Button variant="primary" type="submit" onClick={() => this.handleSumbit}>
                             Add Employee
                         </Button>
-                        <SuccessAlertModal
+                        <SuccessAlert
             show={this.state.successModalShow}
             onHide={successModalClose}
             message={this.state.alertMessage}
-          ></SuccessAlertModal>
-          <FailAlertModal
+          />
+          <FailAlert
             show={this.state.failModalShow}
             onHide={failModalClose}
             message={this.state.alertMessage}
-          ></FailAlertModal>
+          />
                     </Form.Group>
                 </Form>
             </Col>

@@ -6,17 +6,17 @@ namespace ManagementAPI.Models
 {
     public class Employee
     {
-        public int Emp_id { get; set; }
+        public int emp_id { get; set; }
 
-        public string Emp_name { get; set; }
+        public string emp_name { get; set; }
 
-        public string Emp_phone { get; set; }
+        public string emp_phone { get; set; }
 
-        public string Emp_email { get; set; }
+        public string emp_email { get; set; }
 
-        public decimal Emp_hourly_wage { get; set; }
+        public decimal emp_hourly_wage { get; set; }
 
-        public decimal Emp_hours { get; set; }
+        public decimal emp_hours { get; set; }
     
     }
 }

@@ -5,9 +5,9 @@ import {AddEmployee} from './modals/AddEmployee';
 import {EditEmployee} from './modals/EditEmployee';
 import './css/Employee.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { SuccessAlertModal } from "./modals/SuccessAlertModal";
-import { FailAlertModal } from "./modals/FailAlertModal";
-import { ConfirmAlertModal } from "./modals/ConfirmAlertModal";
+import { SuccessAlert } from "./modals/SuccessAlert";
+import { FailAlert } from "./modals/FailAlert";
+import { ConfirmAlert } from "./modals/ConfirmAlert";
 
 export class Employee extends Component{
     constructor(props){
@@ -25,7 +25,7 @@ export class Employee extends Component{
         }
     }
     refreshList(){
-        fetch('https://localhost:5001/api/employee')
+        fetch('http://localhost:5000/api/employee')
         .then(response=>response.json())
         .then(data=>{
             this.setState({emps:data});
@@ -39,6 +39,7 @@ export class Employee extends Component{
     componentDidUpdate(){
         this.refreshList();
     }
+
     deleteEmp(id){
         this.setState({ confirmModalShow: false });
   
@@ -80,20 +81,20 @@ export class Employee extends Component{
                     </thead>
                     <tbody>
                         {emps.map(emp=>
-                            <tr key={emp.Emp_id}>
-                                <td>{emp.Emp_id}</td>
-                                <td>{emp.Emp_name}</td>
-                                <td>{emp.Emp_phone}</td>
-                                <td>{emp.Emp_email}</td>
-                                <td>{emp.Emp_hourly_wage}</td>
-                                <td>{emp.Emp_hours}</td>
+                            <tr key={emp.emp_id}>
+                                <td>{emp.emp_id}</td>
+                                <td>{emp.emp_name}</td>
+                                <td>{emp.emp_phone}</td>
+                                <td>{emp.emp_email}</td>
+                                <td>{emp.emp_hourly_wage}</td>
+                                <td>{emp.emp_hours}</td>
                                 <td>
 <ButtonToolbar style={{display:'block'}}>
     <Button className="mr-2" variant="info"
-    onClick={()=>this.setState({editModalShow:true, empid:emp.Emp_id, empname:emp.Emp_name, empphone:emp.Emp_phone,empemail:emp.Emp_email, emphw:emp.Emp_hourly_wage, emph:emp.Emp_hours})}
+    onClick={()=>this.setState({editModalShow:true, empid:emp.emp_id, empname:emp.emp_name, empphone:emp.emp_phone,empemail:emp.emp_email, emphw:emp.emp_hourly_wage, emph:emp.emp_hours})}
     style={{width: 70}}>
         Edit</Button>
-        <Button className="mr-2" variant="danger" onClick={()=>this.setState({alertMessage: 'Are you sure?', confirmModalShow:true, empid:emp.Emp_id})}
+        <Button className="mr-2" variant="danger" onClick={()=>this.setState({alertMessage: 'Are you sure?', confirmModalShow:true, empid:emp.emp_id})}
      style={{width:70}}>
         Delete</Button>
         <EditEmployee show={this.state.editModalShow}
@@ -108,8 +109,7 @@ export class Employee extends Component{
                                 </td>
                             </tr>)}
                     </tbody>
-                </Table>
-                <ButtonToolbar className="ml-5">
+                    <ButtonToolbar>
                     <Button variant='primary'
                     onClick={()=>this.setState({addModalShow:true})}>
                     Add Employee</Button>
@@ -117,17 +117,19 @@ export class Employee extends Component{
                     <AddEmployee show={this.state.addModalShow}
                     onHide={addModalClose}/>
                 </ButtonToolbar>
-                <FailAlertModal
+                </Table>
+                
+                <FailAlert
             show={this.state.failModalShow}
             onHide={failModalClose}
             message={this.state.alertMessage}
-          ></FailAlertModal>
-          <ConfirmAlertModal
+          />
+          <ConfirmAlert
             show={this.state.confirmModalShow}
             onHide={confirmModalClose}
             message={this.state.alertMessage}
             onClickYes={()=>this.deleteEmp(this.state.empid)}
-          ></ConfirmAlertModal> 
+          /> 
             </div>
         )
     }
