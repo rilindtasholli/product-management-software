@@ -8,6 +8,7 @@ import { FaBell } from 'react-icons/fa';
 import { FaChartLine } from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
 import {SidebarData} from './SidebarData';
+import { Scrollbars } from 'react-custom-scrollbars';
 import './Navbar.css';
 
 function Navbar() {
@@ -22,14 +23,17 @@ function Navbar() {
                 </NavLink>
                 <div className='title m-auto'>
                     <MdDashboard className='logo'/>
-                    <h2>Product Management Software</h2>
+                    <h2>Management Software</h2>
                 </div>
                 <NavLink to="#" className='notifications'>
                     <FaBell  onClick={showSideBar} size='35px'/>
                 </NavLink>
             </div>
             <nav id='navmenu' className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                <ul className='nav-menu-items '>
+                <Scrollbars style={{ width: '100vw', height: '85%', paddingLeft:'8px'}}
+                
+                >
+                <ul className='nav-menu-items'>
                     <li className='navbar-toggle'>
                         <NavLink to="#" className='menu-close'>
                             <AiOutlineCloseCircle onClick={showSideBar}/>
@@ -46,7 +50,7 @@ function Navbar() {
                         )
                     })}
                 </ul>
-                
+                </Scrollbars>
                 <a className='logout-button' href='/'>Logout <FiLogOut size='15px'/></a>
             </nav>
         </>

@@ -14,6 +14,7 @@ export class AddEmployee extends Component{
             // errors: {},
             successModalShow: false,
             failModalShow: false,
+            alertMessage:null
             // confirmModalShow: false
             
         }
@@ -41,7 +42,7 @@ export class AddEmployee extends Component{
             },
             body:JSON.stringify({
                 //Employee_ID:null,
-                Emp_id:event.target.Emp_id.v,
+                //Emp_id:null,
                 Emp_name:event.target.Emp_name.value,
                 Emp_phone:event.target.Emp_phone.value,
                 Emp_email:event.target.Emp_email.value,
@@ -89,7 +90,7 @@ export class AddEmployee extends Component{
     render(){
         let successModalClose = () => {
             this.setState({ successModalShow: false });
-            window.location.reload();
+            //window.location.reload();
           }
   
           let failModalClose = () => this.setState({ failModalShow: false });
@@ -163,13 +164,13 @@ centered
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Button variant="primary" type="submit" onClick={() => this.setState({ successModalShow: true })}>
+                        <Button variant="primary" type="submit" onClick={() => this.setState({ alertMessage:"Added successfully!", successModalShow: true })}>
                             Add Employee
                         </Button>
                         <SuccessAlertModal
             show={this.state.successModalShow}
             onHide={successModalClose}
-            message='Added Succesfully!'
+            message={this.state.alertMessage}
           ></SuccessAlertModal>
                     </Form.Group>
                 </Form>

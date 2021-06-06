@@ -5,7 +5,6 @@ import PieChart from '../components/charts/PieChart';
 import LineChart from '../components/charts/LineChart';
 import { Table, Button, ButtonToolbar } from "react-bootstrap";
 import './css/Dashboard.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export class Dashboard extends Component {
@@ -13,7 +12,8 @@ export class Dashboard extends Component {
     render() {
 
         return (
-            <div className='main-content'>
+            
+            <div className='main-content-dashboard'>
                 <div className='main-div'>
                     <div className='sales-activity'>
                         <h1 className='activity-container-title' >Sales Activity</h1>

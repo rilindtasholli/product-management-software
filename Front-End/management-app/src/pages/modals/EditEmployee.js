@@ -12,6 +12,7 @@ export class EditEmployee extends Component{
             // errors: {},
             successModalShow: false,
             failModalShow: false,
+            alertMessage:null
             // confirmModalShow: false
             
         }
@@ -87,7 +88,7 @@ export class EditEmployee extends Component{
     render(){
         let successModalClose = () => {
             this.setState({ successModalShow: false });
-            window.location.reload();
+            //window.location.reload();
           }
   
           let failModalClose = () => this.setState({ failModalShow: false });
@@ -128,7 +129,7 @@ centered
                     <Form.Group controlId="Emp_phone">
                         <Form.Label>Phone Number</Form.Label>
                         <Form.Control type="text" name="Emp_phone" required 
-                        defaultValue={this.props.emppphone}
+                        defaultValue={this.props.empphone}
                         placeholder="Employee's phone number"/>
                     </Form.Group>
 
@@ -154,13 +155,13 @@ centered
                     </Form.Group>
 
                     <Form.Group>
-                        <Button variant="primary" type="submit"onClick={() => this.setState({ successModalShow: true })}>
+                        <Button variant="primary" type="submit"onClick={() => this.setState({ alertMessage:"Upadted successfully!",successModalShow: true })}>
                             Update Employee
                         </Button>
                         <SuccessAlertModal
             show={this.state.successModalShow}
             onHide={successModalClose}
-            message='Updated Succesfully!'
+            message={this.state.alertMessage}
           ></SuccessAlertModal>
                     </Form.Group>
                 </Form>

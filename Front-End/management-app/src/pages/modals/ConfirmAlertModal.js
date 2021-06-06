@@ -32,7 +32,7 @@ export class ConfirmAlertModal extends Component {
 
           <Modal.Footer> 
             <div className="align-self-center mx-auto">
-              <Button   variant="success" size="lg" onClick={this.props.onHide}>
+              <Button   variant="success" size="lg" onClick={this.props.onClickYes}>
                 Yes
               </Button>
             </div>
