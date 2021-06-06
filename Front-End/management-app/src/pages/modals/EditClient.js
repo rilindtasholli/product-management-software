@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
+import { SuccessAlert } from "./SuccessAlert";
+import { FailAlert } from "./FailAlert";
 
 export class EditClient extends Component {
   constructor(props) {
     super(props);
+    this.state={client:[],  successModalShow: false, failModalShow: false,alertMessage:null};
     this.handleSubmit=this.handleSubmit.bind(this);
   }
 
   handleSubmit(event){
     event.preventDefault();
-    fetch('http://localhost:5000/api/clients',{
+    fetch('http://localhost:5000/api/client',{
         method:'PUT',
         headers:{
             'Accept':'application/json',
@@ -26,14 +29,21 @@ export class EditClient extends Component {
     })
     .then(res=>res.json())
     .then((result)=>{
-        alert(result);
+      this.setState({ alertMessage:"Updated Successfully!",successModalShow: true });
     },
     (error)=>{
-        alert('Failed');
+      this.setState({ alertMessage:"Updated Failed!", failModalShow: true});
     })
+}
 
-  }
   render() {
+
+    let successModalClose = () => {
+      this.setState({ successModalShow: false });
+      this.props.onHide(true);
+    }
+
+    let failModalClose = () => this.setState({ failModalShow: false });
     return (
       <div className="container">
         <Modal
@@ -50,17 +60,18 @@ export class EditClient extends Component {
           <ModalBody>
             <Row>
               <Col sm={6}>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}
+                style={{fontWeight:'bold'}}>
                  
                 <Form.Group controlId="ClientId">
                     <Form.Label>ClientId</Form.Label>
                     <Form.Control
                       type="text"
-                      name="ClientId"
+                      name="cli_id"
                       required
                       placeholder="ClientId..."
                       disabled
-                      defaultValue={this.props.cli_id}
+                      defaultValue={this.props.cliId}
                     />
                   </Form.Group>
 
@@ -69,10 +80,10 @@ export class EditClient extends Component {
                     <Form.Label>ClientName</Form.Label>
                     <Form.Control
                       type="text"
-                      name="ClientName"
+                      name="cli_name"
                       required
                       placeholder="ClientName..."
-                      defaultValue={this.props.cli_name}
+                      defaultValue={this.props.cliName}
                     />
                   </Form.Group>
 
@@ -80,10 +91,10 @@ export class EditClient extends Component {
                     <Form.Label>ClientEmail</Form.Label>
                     <Form.Control
                       type="text"
-                      name="ClientEmail"
+                      name="cli_email"
                       required
                       placeholder="ClientEmail..."
-                      defaultValue={this.props.cli_email}
+                      defaultValue={this.props.cliEmail}
                     />
                   </Form.Group>
 
@@ -91,10 +102,10 @@ export class EditClient extends Component {
                     <Form.Label>ClientAddress</Form.Label>
                     <Form.Control
                       type="text"
-                      name="ClientAddress"
+                      name="cli_address"
                       required
                       placeholder="ClientAddress..."
-                      defaultValue={this.props.cli_address}
+                      defaultValue={this.props.cliAddress}
                     />
                   </Form.Group>
 
@@ -102,21 +113,21 @@ export class EditClient extends Component {
                     <Form.Label>ClientCity</Form.Label>
                     <Form.Control
                       type="text"
-                      name="ClientCity"
+                      name="cli_city"
                       required
                       placeholder="ClientCity..."
-                      defaultValue={this.props.cli_city}
+                      defaultValue={this.props.cliCity}
                     />
                   </Form.Group>
 
                   <Form.Group controlId="ClientName">
-                    <Form.Label>PhoneNumber</Form.Label>
+                    <Form.Label>ClientPhone</Form.Label>
                     <Form.Control
                       type="text"
-                      name="PhoneNumber"
+                      name="cli_phone"
                       required
-                      placeholder="PhoneNumber..."
-                      defaultValue={this.props.cli_phone}
+                      placeholder="ClientPhone..."
+                      defaultValue={this.props.cliPhone}
                     />
                   </Form.Group>
 
@@ -136,6 +147,16 @@ export class EditClient extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
+        <SuccessAlert
+            show={this.state.successModalShow}
+            onHide={successModalClose}
+            message={this.state.alertMessage}
+          />
+          <FailAlert
+            show={this.state.failModalShow}
+            onHide={failModalClose}
+            message={this.state.alertMessage}
+          />
       </div>
     );
   }
