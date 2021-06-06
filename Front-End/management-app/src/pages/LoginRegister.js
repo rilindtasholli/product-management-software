@@ -8,9 +8,9 @@ import './css/LoginRegister.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 //import { AddClient } from "./AddClient";
-import { SuccessAlertModal } from "./modals/SuccessAlertModal";
-import { FailAlertModal } from "./modals/FailAlertModal";
-import { ConfirmAlertModal } from "./modals/ConfirmAlertModal";
+import { SuccessAlert } from "./modals/SuccessAlert";
+import { FailAlert } from "./modals/FailAlert";
+import { ConfirmAlert } from "./modals/ConfirmAlert";
 
 
 
@@ -247,23 +247,23 @@ export class LoginRegister extends Component {
             </Button>
           </ButtonToolbar> */}
 
-          {/* <ConfirmAlertModal
+          {/* <ConfirmAlert
             show={this.state.confirmModalShow}
             onHide={confirmModalClose}
             message='are you sure?'
-          ></ConfirmAlertModal> */}
+          ></ConfirmAlert> */}
 
-          <SuccessAlertModal
+          <SuccessAlert
             show={this.state.successModalShow}
             onHide={successModalClose}
             message='Registered Succesfully!'
-          ></SuccessAlertModal>
+          ></SuccessAlert>
 
-          <FailAlertModal
+          <FailAlert
             show={this.state.failModalShow}
             onHide={failModalClose}
             message='Registration Failed!'
-          ></FailAlertModal>
+          ></FailAlert>
 
         
                         </div>

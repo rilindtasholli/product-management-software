@@ -3,7 +3,7 @@ import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
 import { FaCheckCircle } from 'react-icons/fa';
 
 
-export class SuccessAlertModal extends Component {
+export class SuccessAlert extends Component {
   constructor(props) {
     super(props);
   }
@@ -43,4 +43,4 @@ export class SuccessAlertModal extends Component {
   }
 }
 
-export default SuccessAlertModal;
+export default SuccessAlert;

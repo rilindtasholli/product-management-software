@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Modal,Button, Row, Col, Form,Image} from 'react-bootstrap';
-import { SuccessAlertModal } from "./SuccessAlertModal";
-import { FailAlertModal } from "./FailAlertModal";
+import { SuccessAlert } from "./SuccessAlert";
+import { FailAlert } from "./FailAlert";
 
 export class EditEmployee extends Component{
     constructor(props){
@@ -33,29 +33,30 @@ export class EditEmployee extends Component{
 
     handleSubmit(event){
         event.preventDefault();
-        fetch('https://localhost:5001/api/employee',{
+        fetch('http://localhost:5000/api/employee',{
             method:'PUT',
             headers:{
                 'Accept':'application/json',
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                Emp_id:event.target.Emp_id.value,
-                Emp_name:event.target.Emp_name.value,
-                Emp_phone:event.target.Emp_phone.value,
-                Emp_email:event.target.Emp_email.value,
-                Emp_hourly_wage:event.target.Emp_hourly_wage.value,
-                Emp_hours:event.target.Emp_hours.value
+                emp_id:event.target.emp_id.value,
+                emp_name:event.target.emp_name.value,
+                emp_phone:event.target.emp_phone.value,
+                emp_email:event.target.emp_email.value,
+                emp_hourly_wage:event.target.emp_hourly_wage.value,
+                emp_hours:event.target.emp_hours.value
 
             })
         })
         .then(res=>res.json())
             .then((result)=>{
-                this.setState({ alertMessage:"Success",successModalShow: true });
+                
+                this.setState({ alertMessage:"Added Successfully!",successModalShow: true });
                 
             },
             (error)=>{
-                this.setState({ alertMessage:"Failed",failModalShow: true });
+                this.setState({ alertMessage:"Add Failed!", failModalShow: true });
               
             })
     }
@@ -88,7 +89,7 @@ export class EditEmployee extends Component{
     render(){
         let successModalClose = () => {
             this.setState({ successModalShow: false });
-            //window.location.reload();
+            this.props.onHide(true);
           }
   
           let failModalClose = () => this.setState({ failModalShow: false });
@@ -111,45 +112,45 @@ centered
         <Row>
             <Col sm={6}>
                 <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="Emp_id">
+                <Form.Group controlId="emp_id">
                         <Form.Label>ID</Form.Label>
-                        <Form.Control type="number" name="Emp_id" required 
-                        placeholder="Emp_id"
+                        <Form.Control type="number" name="emp_id" required 
+                        placeholder="emp_id"
                         disabled
                         defaultValue={this.props.empid}/>
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_name">
+                    <Form.Group controlId="emp_name">
                         <Form.Label>Full Name</Form.Label>
-                        <Form.Control type="text" name="Emp_name" required 
+                        <Form.Control type="text" name="emp_name" required 
                         defaultValue={this.props.empname}
                         placeholder="Employee's full name"/>
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_phone">
+                    <Form.Group controlId="emp_phone">
                         <Form.Label>Phone Number</Form.Label>
-                        <Form.Control type="text" name="Emp_phone" required 
+                        <Form.Control type="text" name="emp_phone" required 
                         defaultValue={this.props.empphone}
                         placeholder="Employee's phone number"/>
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_email">
+                    <Form.Group controlId="emp_email">
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control type="mail" name="Emp_email" required 
+                        <Form.Control type="mail" name="emp_email" required 
                         defaultValue={this.props.empemail}
                         placeholder="Employee's email address"/>
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_hourly_wage">
+                    <Form.Group controlId="emp_hourly_wage">
                         <Form.Label>Hourly Wage</Form.Label>
-                        <Form.Control type="text" name="Emp_hourly_wage" required 
+                        <Form.Control type="text" name="emp_hourly_wage" required 
                         defaultValue={this.props.emphw}
                         placeholder="Hourly Wage"/>
                     </Form.Group>
 
-                    <Form.Group controlId="Emp_hours">
+                    <Form.Group controlId="emp_hours">
                         <Form.Label>Hours</Form.Label>
-                        <Form.Control type="text" name="Emp_hours" required 
+                        <Form.Control type="text" name="emp_hours" required 
                         defaultValue={this.props.emph}
                         placeholder="Employee's working hours"/>
                     </Form.Group>
@@ -158,16 +159,16 @@ centered
                         <Button variant="primary" type="submit"onClick={() => this.handleSumbit}>
                             Update Employee
                         </Button>
-                        <SuccessAlertModal
+                        <SuccessAlert
             show={this.state.successModalShow}
             onHide={successModalClose}
             message={this.state.alertMessage}
-          ></SuccessAlertModal>
-          <FailAlertModal
+          />
+          <FailAlert
             show={this.state.failModalShow}
             onHide={failModalClose}
             message={this.state.alertMessage}
-          ></FailAlertModal>
+          />
                     </Form.Group>
                 </Form>
             </Col>

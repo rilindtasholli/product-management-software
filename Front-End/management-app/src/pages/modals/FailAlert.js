@@ -3,7 +3,7 @@ import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
 import { RiCloseCircleFill } from 'react-icons/ri';
 
 
-export class FailAlertModal extends Component {
+export class FailAlert extends Component {
   constructor(props) {
     super(props);
   }
@@ -43,4 +43,4 @@ export class FailAlertModal extends Component {
   }
 }
 
-export default FailAlertModal;
+export default FailAlert;
