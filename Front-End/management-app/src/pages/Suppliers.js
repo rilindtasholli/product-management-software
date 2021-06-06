@@ -2,18 +2,33 @@ import React,{Component} from 'react';
 import {Table, Button, ButtonToolbar} from 'react-bootstrap';
 import {AddSupplier} from './modals/AddSupplier';
 import {EditSupplier} from './modals/EditSupplier';
-import "./css/Suppliers.css";
+import './css/Suppliers.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { SuccessAlertModal } from "./modals/SuccessAlertModal";
+import { FailAlertModal } from "./modals/FailAlertModal";
+import { ConfirmAlertModal } from "./modals/ConfirmAlertModal";
 
 
 export class Suppliers extends Component{
 
     constructor(props){
         super(props);
-        this.state={sups:[], addModalShow:false, editModalShow:false}
+       // this.state={sups:[], addModalShow:false, editModalShow:false}
+       this.state = {
+        sups:[], addModalShow:false, editModalShow:false,
+        // loginFormActive: true,
+        // fields: {},
+        // errors: {},
+        successModalShow: false,
+        failModalShow: false,
+        confirmModalShow: false,
+        alertMessage:null
+    
     }
+}
 
     refreshList(){
-        fetch("http://localhost:5000/api/Suppliers")
+        fetch('http://localhost:5000/api/suppliers')
         .then(response=>response.json())
         .then(data=>{
             this.setState({sups:data});
@@ -28,19 +43,28 @@ export class Suppliers extends Component{
         this.refreshList();
     }
 
-    deleteSupp(sup_id){
-        if(window.confirm('Are you sure?')){
-            fetch("http://localhost:5000/api/Suppliers"+sup_id,{
-                method:'DELETE',
-                header:{'Accept':'application/json',
-            'Content-Type':'application/json'}
-            })
-        }
-    }
-    render(){
-        const {sups,sup_id,sup_name,sup_email,sup_phone,supp_address}=this.state;
+    deleteSup(id){
+        this.setState({ confirmModalShow: false });
+        
+        fetch('http://localhost:5000/api/suppliers/'+id,{
+          method:'DELETE',
+          headers:{'Accept':'applicaton/json', 'Content-Type':'applicaton/json'}
+        }).then(res=>res.json())
+        .then((result)=>{
+          this.setState({ alertMessage: 'Deleted Successfully!', successModalShow: true });
+        },
+        (error)=>{
+          this.setState({ alertMessage: 'Delete Failed!', failModalShow: true });
+        })
+      
+      }
+      render() {
+    
+        const {sups,supid,supname,supemail,supphone,supaddress}=this.state;
         let addModalClose=()=>this.setState({addModalShow:false});
         let editModalClose=()=>this.setState({editModalShow:false});
+        let failModalClose = () => this.setState({ failModalShow: false });
+        let confirmModalClose = () => this.setState({ confirmModalShow: false });
         return(
             <div className="main-content-suppliers">
             <Table className=" w-75 m-auto  font-weight-bold" striped  size="md">
@@ -81,23 +105,23 @@ export class Suppliers extends Component{
     <Button className="mr-2" variant="info"
         style={{ background: "#99ccff", width: 60}}
     onClick={()=>this.setState({editModalShow:true,
-        sup_id:sup.sup_id,sup_name:sup.sup_name,
-        sup_email:sup.sup_email,sup_phone:sup.sup_phone,supp_address:sup.supp_address})}>
+    supid:sup.sup_id,supname:sup.sup_name,
+        supemail:sup.sup_email,supphone:sup.sup_phone,supaddress:sup.supp_address})}>
             Edit
         </Button>
 
-        <Button className="mr-2" variant="danger"
-    onClick={()=>this.deleteSupp(sup.sup_id)}>
+        <Button className="mr-2" variant="danger" onClick={()=>this.setState({alertMessage: 'Are you sure?', confirmModalShow:true, supid:sup.sup_id})}
+     style={{width:70}}>
             Delete
         </Button>
 
         <EditSupplier show={this.state.editModalShow}
         onHide={editModalClose}
-    sup_email={sup_email}
-    sup_id={sup_id}
-    sup_name={sup_name}
-    sup_phone={sup_phone}
-    supp_address={supp_address}
+    supemail={supemail}
+    supid={supid}
+    supname={supname}
+    supphone={supphone}
+    supaddress={supaddress}
 />
 </ButtonToolbar>
     </td>
@@ -116,12 +140,21 @@ export class Suppliers extends Component{
                     onHide={addModalClose}/>
                 
                 </ButtonToolbar>
+                <FailAlertModal
+            show={this.state.failModalShow}
+            onHide={failModalClose}
+            message={this.state.alertMessage}
+          ></FailAlertModal>
+          <ConfirmAlertModal
+            show={this.state.confirmModalShow}
+            onHide={confirmModalClose}
+            message={this.state.alertMessage}
+            onClickYes={()=>this.deleteSup(this.state.supid)}
+          ></ConfirmAlertModal> 
               </Table>
             </div>
     )
     }
     }
-    
+
     export default Suppliers;
-
-
