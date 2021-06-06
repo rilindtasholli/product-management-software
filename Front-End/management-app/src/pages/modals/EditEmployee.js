@@ -51,11 +51,11 @@ export class EditEmployee extends Component{
         })
         .then(res=>res.json())
             .then((result)=>{
-                this.setState({ successModalShow: true });
+                this.setState({ alertMessage:"Success",successModalShow: true });
                 
             },
             (error)=>{
-                this.setState({ failModalShow: true });
+                this.setState({ alertMessage:"Failed",failModalShow: true });
               
             })
     }
@@ -155,7 +155,7 @@ centered
                     </Form.Group>
 
                     <Form.Group>
-                        <Button variant="primary" type="submit"onClick={() => this.setState({ alertMessage:"Upadted successfully!",successModalShow: true })}>
+                        <Button variant="primary" type="submit"onClick={() => this.handleSumbit}>
                             Update Employee
                         </Button>
                         <SuccessAlertModal
@@ -163,6 +163,11 @@ centered
             onHide={successModalClose}
             message={this.state.alertMessage}
           ></SuccessAlertModal>
+          <FailAlertModal
+            show={this.state.failModalShow}
+            onHide={failModalClose}
+            message={this.state.alertMessage}
+          ></FailAlertModal>
                     </Form.Group>
                 </Form>
             </Col>
