@@ -3,11 +3,15 @@ import React, { Component } from 'react';
 import {RiAccountPinCircleFill} from 'react-icons/ri';
 import {ImUserPlus} from 'react-icons/im';
 import { MdDashboard } from 'react-icons/md';
-import './css/LoginRegister.css';
 
-import { SuccessAlertModal } from "./modals/SuccessAlert";
-import { FailAlertModal } from "./modals/FailAlert";
-// import { ConfirmAlertModal } from "./modals/ConfirmAlert";
+import './css/LoginRegister.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+//import { AddClient } from "./AddClient";
+import { SuccessAlertModal } from "./modals/SuccessAlertModal";
+import { FailAlertModal } from "./modals/FailAlertModal";
+import { ConfirmAlertModal } from "./modals/ConfirmAlertModal";
+
 
 
 export class LoginRegister extends Component {
