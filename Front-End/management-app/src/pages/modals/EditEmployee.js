@@ -52,11 +52,11 @@ export class EditEmployee extends Component{
         .then(res=>res.json())
             .then((result)=>{
                 
-                this.setState({ alertMessage:"Added Successfully!",successModalShow: true });
+                this.setState({ alertMessage:"Updated Successfully!",successModalShow: true });
                 
             },
             (error)=>{
-                this.setState({ alertMessage:"Add Failed!", failModalShow: true });
+                this.setState({ alertMessage:"Update Failed!", failModalShow: true });
               
             })
     }

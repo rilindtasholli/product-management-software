@@ -6,9 +6,11 @@ package-lock.json
 Front-End/management-app/node_modules/
 Front-End/management-app/package-lock.json
 Front-End/management-app/package.json
+ Back-End/WebAPI/obj
 
 Back-End/WebAPI/obj/
 Back-End/.vs/
+
 
 
 # Logs
