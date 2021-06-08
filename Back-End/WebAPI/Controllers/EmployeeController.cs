@@ -34,7 +34,7 @@ namespace ManagementAPI.Controllers
                        Emp_id, Emp_name,
                        Emp_phone, Emp_email,
                        Emp_hourly_wage, Emp_hours
-                       from ProductManagementDB2.Employees";
+                       from ProductManagementDB.Employees";
                 DataTable table = new DataTable();
             //string mysqlDataSourse = _configuration.GetConnectionString("Default");
             //MySqlDataReader myReader;
@@ -69,11 +69,11 @@ namespace ManagementAPI.Controllers
                              '" + emp.Emp_hourly_wage + @"',
                              '" + emp.Emp_hours + @"'
                              )";
-                DataTable table = new DataTable();
+            DataTable table = new DataTable();
             //string mysqlDataSourse = _configuration.GetConnectionString("Default");
             //MySqlDataReader myReader;
             //using (MySqlConnection myCon = new MySqlConnection(mysqlDataSourse))
-            string sqlDataSource = _configuration.GetConnectionString("ManagementAppCon");
+                string sqlDataSource = _configuration.GetConnectionString("ManagementAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -100,14 +100,14 @@ namespace ManagementAPI.Controllers
                             Emp_email='" + emp.Emp_email + @"',
                             Emp_hourly_wage='" + emp.Emp_hourly_wage + @"',
                             Emp_hours='" + emp.Emp_hours + @"'
-                            where Emp_id=" + emp.Emp_id + @"
+                            where emp_id=" + emp.Emp_id + @"
                             ";
 
-                DataTable table = new DataTable();
+            DataTable table = new DataTable();
             //string mysqlDataSourse = _configuration.GetConnectionString("Default");
             //MySqlDataReader myReader;
             //using (MySqlConnection myCon = new MySqlConnection(mysqlDataSourse))
-            string sqlDataSource = _configuration.GetConnectionString("ManagementAppCon");
+                string sqlDataSource = _configuration.GetConnectionString("ManagementAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -133,13 +133,17 @@ namespace ManagementAPI.Controllers
                             ";
 
                 DataTable table = new DataTable();
-                string mysqlDataSourse = _configuration.GetConnectionString("Default");
-                MySqlDataReader myReader;
-                using (MySqlConnection myCon = new MySqlConnection(mysqlDataSourse))
+            string sqlDataSource = _configuration.GetConnectionString("ManagementAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+                //string mysqlDataSourse = _configuration.GetConnectionString("Default");
+                //MySqlDataReader myReader;
+                //using (MySqlConnection myCon = new MySqlConnection(mysqlDataSourse))
+            {
+                myCon.Open();
+                //using (MySqlCommand myCommand = new MySqlCommand(query, myCon))
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCon.Open();
-                    using (MySqlCommand myCommand = new MySqlCommand(query, myCon))
-                    {
                         myReader = myCommand.ExecuteReader();
                         table.Load(myReader);
 
@@ -149,6 +153,7 @@ namespace ManagementAPI.Controllers
                 }
                 return new JsonResult("Deleted successfully");
             }
+            //public List <UserModel> GetUsers()
         }
     }
 

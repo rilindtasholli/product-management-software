@@ -1,24 +1,21 @@
 ﻿<Properties StartupConfiguration="{1456A3AB-950F-4671-B348-80CD7E4DFE0C}|WebAPI">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/Controllers/UserController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/appsettings.json">
     <Files>
-      <File FileName="WebAPI/Models/Employee.cs" Line="4" Column="30" />
-      <File FileName="WebAPI/Controllers/EmployeeController.cs" Line="142" Column="1" />
-      <File FileName="WebAPI/appsettings.json" Line="14" Column="5" />
-      <File FileName="WebAPI/Startup.cs" Line="12" Column="18" />
-      <File FileName="WebAPI/Controllers/UserController.cs" Line="36" Column="36" />
+      <File FileName="WebAPI/Models/Employee.cs" Line="9" Column="21" />
+      <File FileName="WebAPI/Controllers/EmployeeController.cs" Line="145" Column="76" />
+      <File FileName="WebAPI/Models/Sales.cs" Line="15" Column="19" />
+      <File FileName="WebAPI/Controllers/SalesController.cs" Line="135" Column="19" />
+      <File FileName="WebAPI/appsettings.json" Line="3" Column="86" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ManagementAPI" expanded="True">
             <Node name="ManagementAPI" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
-              <Node name="Controllers" expanded="True">
-                <Node name="UserController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="appsettings.json" selected="True" />
             </Node>
           </Node>
         </State>
