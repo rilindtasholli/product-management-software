@@ -1,0 +1,16 @@
+#edit:hover{
+    background-color: rgb(71, 220, 234);
+    }
+    #edit:active{
+        box-shadow: wheat;
+        }
+    #add:hover{
+        background-color: rgb(27, 121, 188);
+    }
+    #add{
+        background:rgb(20,89,137);
+        margin-left: 150px;
+    }
+    .div{
+        padding-top:20px;
+    }
