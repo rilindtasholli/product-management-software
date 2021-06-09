@@ -3,7 +3,7 @@ import { Modal, ModalBody, Button, Row, Col, Form } from "react-bootstrap";
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
 
 
-export class ConfirmAlertModal extends Component {
+export class ConfirmAlert extends Component {
   constructor(props) {
     super(props);
   }
@@ -32,7 +32,7 @@ export class ConfirmAlertModal extends Component {
 
           <Modal.Footer> 
             <div className="align-self-center mx-auto">
-              <Button   variant="success" size="lg" onClick={this.props.onHide}>
+              <Button   variant="success" size="lg" onClick={this.props.onClickYes}>
                 Yes
               </Button>
             </div>
@@ -48,4 +48,4 @@ export class ConfirmAlertModal extends Component {
   }
 }
 
-export default ConfirmAlertModal;
+export default ConfirmAlert;

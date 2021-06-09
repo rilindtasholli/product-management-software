@@ -3,11 +3,15 @@ import React, { Component } from 'react';
 import {RiAccountPinCircleFill} from 'react-icons/ri';
 import {ImUserPlus} from 'react-icons/im';
 import { MdDashboard } from 'react-icons/md';
-import './css/LoginRegister.css';
 
-import { SuccessAlertModal } from "./modals/SuccessAlert";
-import { FailAlertModal } from "./modals/FailAlert";
-// import { ConfirmAlertModal } from "./modals/ConfirmAlert";
+import './css/LoginRegister.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+//import { AddClient } from "./AddClient";
+import { SuccessAlert } from "./modals/SuccessAlert";
+import { FailAlert } from "./modals/FailAlert";
+import { ConfirmAlert } from "./modals/ConfirmAlert";
+
 
 
 export class LoginRegister extends Component {
@@ -243,23 +247,23 @@ export class LoginRegister extends Component {
             </Button>
           </ButtonToolbar> */}
 
-          {/* <ConfirmAlertModal
+          {/* <ConfirmAlert
             show={this.state.confirmModalShow}
             onHide={confirmModalClose}
             message='are you sure?'
-          ></ConfirmAlertModal> */}
+          ></ConfirmAlert> */}
 
-          <SuccessAlertModal
+          <SuccessAlert
             show={this.state.successModalShow}
             onHide={successModalClose}
             message='Registered Succesfully!'
-          ></SuccessAlertModal>
+          ></SuccessAlert>
 
-          <FailAlertModal
+          <FailAlert
             show={this.state.failModalShow}
             onHide={failModalClose}
             message='Registration Failed!'
-          ></FailAlertModal>
+          ></FailAlert>
 
         
                         </div>

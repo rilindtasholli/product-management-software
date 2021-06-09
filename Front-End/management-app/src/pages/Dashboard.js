@@ -7,7 +7,6 @@ import { Table, Button, ButtonToolbar } from "react-bootstrap";
 import './css/Dashboard.css';
 
 
-
 export class Dashboard extends Component {
     
     render() {

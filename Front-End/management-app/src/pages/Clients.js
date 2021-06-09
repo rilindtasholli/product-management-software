@@ -3,19 +3,20 @@ import { Table, Button, ButtonToolbar } from "react-bootstrap";
 import { AddClient } from "./modals/AddClient";
 import "./css/Clients.css";
 import { EditClient } from "./modals/EditClient";
+import {ConfirmAlert} from "./modals/ConfirmAlert";
 
 
 export class Clients extends Component {
   constructor(props) {
     super(props);
-    this.state = {deps:[], addModalShow: false, editModalShow: false };
+    this.state = {client:[], addModalShow: false, editModalShow: false,  successModalShow: false,failModalShow: false,confirmModalShow: false,alertMessage:null };
   }
 
   refreshList(){
-    fetch("http://localhost:5000/api/clients")
+    fetch('http://localhost:5000/api/client')
     .then(response=>response.json())
     .then(data=>{
-      this.setState({deps:data})
+      this.setState({client:data});
     });
 
   }
@@ -28,9 +29,28 @@ componentDidUpdate(){
     this.refreshList();
 }
 
+deleteCli(id){
+  this.setState({ confirmModalShow: false });
+  
+  fetch('http://localhost:5000/api/client/'+id,{
+    method:'DELETE',
+    headers:{'Accept':'applicaton/json', 'Content-Type':'applicaton/json'}
+  }).then(res=>res.json())
+  .then((result)=>{
+    this.setState({ alertMessage: 'Deleted Successfully!', successModalShow: true });
+  },
+  (error)=>{
+    this.setState({ alertMessage: 'Delete Failed!', failModalShow: true });
+  })
+
+}
+
 
   render() {
-    const {deps}=this.state;
+
+    let confirmModalClose = () => this.setState({ confirmModalShow: false });
+
+    const {client, cliId,cliName,cliEmail,cliAddress,cliCity,cliPhone}=this.state;
     let addModalClose = () => this.setState({ addModalShow: false });
     let editModalClose = () => this.setState({ editModalShow: false });
     return (
@@ -50,13 +70,13 @@ componentDidUpdate(){
               <th>ClientEmail</th>
               <th>ClientAddress</th>
               <th>ClientCity</th>
-              <th>PhoneNumber</th>
+              <th>ClientPhone</th>
               <th style={{ width: 250 }}>Options</th>
             </tr>
           </thead>
 
           <tbody>
-            {deps.map(cli=>
+            {client.map(cli=>
             <tr key={cli.cli_id}>
               <td>{cli.cli_id}</td>
               <td>{cli.cli_name}</td>
@@ -70,190 +90,31 @@ componentDidUpdate(){
                     style={{ background: "#035bad", width: 60 }}
                     className="mr-2"
                     onClick={() => this.setState({ editModalShow: true,
-                    cli_id:cli.cli_id, cli_name:cli.cli_name, cli_email:cli.cli_email,
-                    cli_address:cli.cli_address, cli_city:cli.cli_city, cli_phone:cli.cli_phone  })}>
+                    cliId:cli.cli_id, cliName:cli.cli_name, cliEmail:cli.cli_email,
+                    cliAddress:cli.cli_address,cliCity:cli.cli_city,cliPhone:cli.cli_phone})}>
                     Edit
                   </Button>
                   <Button
                     style={{ width: 80 }}
                     variant="danger"
-                    onClick={()=>this.deleteCli(cli.cli_id)}
+                    onClick={()=>this.setState({alertMessage: 'Are you sure?', confirmModalShow:true, cliId:cli.cli_id})}
                   >
                     Delete
                   </Button>
 
                 </ButtonToolbar>
                 <EditClient
-                  // show={this.state.editModalShow}
-                  // onHide={editModalClose}
-                  // cli_id={cli_id}
-                  // cli_name={cli_name}
-                  // cli_email={cli_email}
-                  // cli_address={cli_address}
-                  // cli_city={cli_city}
-                  // cli_phone={cli_phone}
-                  
+                  show={this.state.editModalShow}
+                  onHide={editModalClose}
+                  cliId={cliId}
+                  cliName={cliName}
+                  cliEmail={cliEmail}
+                  cliAddress={cliAddress}
+                  cliCity={cliCity}
+                  cliPhone={cliPhone}
                 />
               </td>
             </tr>)}
-
-            <tr>
-              <td>2</td>
-              <td>Rilind Tasholli</td>
-              <td>RilindTasholli@gmail.com</td>
-              <td>Adresa</td>
-              <td>Lipjan</td>
-              <td>044-222-222</td>
-              <td>
-              <ButtonToolbar>
-                  <Button
-                    style={{ background: "#035bad", width: 60}}
-                    className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
-                    Edit
-                  </Button>
-                  <Button
-                    style={{ width: 80 }}
-                    variant="danger"
-                    
-                  >
-                    Delete
-                  </Button>
-                </ButtonToolbar>
-                <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
-                />
-              </td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td>Gresa Shala</td>
-              <td>Gresashala@gmail.com</td>
-              <td>Rruga...</td>
-              <td>Prizren</td>
-              <td>044-333-333</td>
-              <td>
-                {" "}
-                <ButtonToolbar>
-                  <Button
-                    style={{ background: "#035bad", width: 60 }}
-                    className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
-                    Edit
-                  </Button>
-                  <Button
-                    style={{ width: 80 }}
-                    variant="danger"
-                    
-                  >
-                    Delete
-                  </Button>
-                </ButtonToolbar>
-                <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
-                />
-              </td>
-            </tr>
-
-            
-            <tr>
-              <td>4</td>
-              <td>Ernise Sallahu</td>
-              <td>Ernisesallahu@gmail.com</td>
-              <td>Rruga</td>
-              <td>Gjakove</td>
-              <td>044-444-444</td>
-              <td>
-                {" "}
-                <ButtonToolbar>
-                  <Button
-                    style={{ background: "#035bad", width: 60 }}
-                    className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
-                    Edit
-                  </Button>
-                  <Button
-                    style={{ width: 80 }}
-                    variant="danger"
-                    
-                  >
-                    Delete
-                  </Button>
-                </ButtonToolbar>
-                <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
-                />
-              </td>
-            </tr>
-
-            
-            <tr>
-              <td>5</td>
-              <td>Blenda Molliqaj</td>
-              <td>Blendamolliqaj@gmail.com</td>
-              <td>Rruga</td>
-              <td>Deçan</td>
-              <td>044-555-555</td>
-              <td>
-                {" "}
-                <ButtonToolbar>
-                  <Button
-                    style={{ background: "#035bad", width: 60 }}
-                    className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
-                    Edit
-                  </Button>
-                  <Button
-                    style={{ width: 80 }}
-                    variant="danger"
-                    
-                  >
-                    Delete
-                  </Button>
-                </ButtonToolbar>
-                <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
-                />
-              </td>
-            </tr>
-
-            
-            <tr>
-              <td>6</td>
-              <td>Lani Zymberi</td>
-              <td>Lanizymberi@gmail.com</td>
-              <td>Rruga...</td>
-              <td>Drenas</td>
-              <td>044-666-666</td>
-              <td>
-                {" "}
-                <ButtonToolbar>
-                  <Button
-                    style={{ background: "#035bad", width: 60 }}
-                    className="mr-2"
-                    onClick={() => this.setState({ editModalShow: true })}>
-                    Edit
-                  </Button>
-                  <Button
-                    style={{ width: 80 }}
-                    variant="danger"
-                    
-                  >
-                    Delete
-                  </Button>
-                </ButtonToolbar>
-                <EditClient
-                  show={this.state.editModalShow}
-                  onHide={editModalClose}
-                />
-              </td>
-            </tr>
-            
 
           </tbody>
           <ButtonToolbar className="add-button">
@@ -264,13 +125,21 @@ componentDidUpdate(){
           </Button>
           <AddClient
             show={this.state.addModalShow}
-            onHide={addModalClose}
-          ></AddClient>
+            onHide={addModalClose}/>
         </ButtonToolbar>
         </Table>
+                    
+        <ConfirmAlert
+            show={this.state.confirmModalShow}
+            onHide={confirmModalClose}
+            message={this.state.alertMessage}
+            onClickYes={()=>this.deleteCli(this.state.cliId)}
+          /> 
 
-    
       </div>
+
+                      
+
     );
   }
 }
