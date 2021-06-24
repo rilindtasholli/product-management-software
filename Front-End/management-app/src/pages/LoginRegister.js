@@ -14,6 +14,7 @@ import { ConfirmAlert } from "./modals/ConfirmAlert";
 
 
 
+
 export class LoginRegister extends Component {
 
     constructor(props) {
@@ -25,10 +26,24 @@ export class LoginRegister extends Component {
             errors: {},
             successModalShow: false,
             failModalShow: false,
+            alertMessage: null,
+
+            emailInput: null,
+            passwordInput: null,
+            passwordCorrect: null,
+
+            userData: null
         }
 
         this.handleRegister=this.handleRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.login=this.login.bind(this);
+
+        this.handleEmailInput = this.handleEmailInput.bind(this);
+        this.handlePasswordInput = this.handlePasswordInput.bind(this);
+
+        this.getUserByEmail = this.getUserByEmail.bind(this)
+        this.checkPassword = this.checkPassword.bind(this)
     }
 
     
@@ -43,6 +58,17 @@ export class LoginRegister extends Component {
 
     }
 
+    handlePasswordInput(e) {
+      this.setState({
+        passwordInput: e.target.value
+      });
+    }
+    handleEmailInput(e) {
+      this.setState({
+        emailInput: e.target.value
+      });
+    }
+    
     validateForm() {
 
       let fields = this.state.fields;
@@ -117,6 +143,11 @@ export class LoginRegister extends Component {
     
 
     handleRegister(event){
+        const bcrypt = require('bcryptjs');
+        const saltRounds = 10;
+        const passwordInput = event.target.password.value;
+        
+
         event.preventDefault();
         if (this.validateForm()) {
             let fields = {};
@@ -128,8 +159,10 @@ export class LoginRegister extends Component {
             fields["password"] = "";
             fields["confirmpassword"] = "";
             this.setState({fields:fields});
-            
-             fetch('http://localhost:5000/api/user',{
+
+            const hash = bcrypt.hashSync(passwordInput, saltRounds);
+
+            fetch('http://localhost:5000/api/user',{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',
@@ -140,37 +173,97 @@ export class LoginRegister extends Component {
                     usr_last_name: event.target.lastname.value,
                     usr_phone: "+" + event.target.code.value + " " + event.target.phone.value,
                     usr_email: event.target.email.value,
-                    usr_password: event.target.password.value
+                    usr_password: hash
                 })
                 
-            })
+            }, {withCredentials: true})
             .then(res=>res.json())
             .then((result)=>{
-                this.setState({ successModalShow: true });
-                
+                this.setState({ alertMessage: 'Registered Successfully!', successModalShow: true });
             },
             (error)=>{
-
-              this.setState({ failModalShow: true });
-              
-                
+              this.setState({ alertMessage: 'Register Failed!', failModalShow: true });
             })
+            
+             
         }
 
     }
 
-    changeFormLogin(){
-            this.setState({
-                loginFormActive: true
-            })
-    }
-
+    
     changeFormRegister(){
-        this.setState({
-            loginFormActive: false
-        })
+      this.setState({
+          loginFormActive: false
+      })
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    changeFormLogin(){
+      this.setState({
+          loginFormActive: true
+      })
+}
+
+    
+    getUserByEmail(){
+
+      fetch('http://localhost:5000/api/user/login/'+this.state.emailInput)
+      .then(response=>response.json())
+      .then(data=>{
+        this.setState({userData:data});
+      })
+    
+    }
+
+    checkPassword(){
+      const bcrypt = require('bcryptjs');
+      const passwordHash = this.state.userData[0].usr_password;
+      const passwordInput = this.state.passwordInput;
+
+      return bcrypt.compareSync(passwordInput, passwordHash);
+
+    }
+
+    login(event){
+      event.preventDefault();
+
+      this.getUserByEmail();
+    }
+    
+
+
+    componentDidUpdate(){
+      if(this.state.userData != null){
+      //if data are fetched...
+        if(this.state.userData[0] == null){
+          alert('Wrong Email or Password!');
+          this.setState({
+            userData: null
+          })
+        }else{
+          if(this.checkPassword()){
+            // alert('login success!!');
+  
+            localStorage.setItem('loginActive', "true")
+  
+            this.setState({
+              userData: null
+            })
+
+            window.location.reload();
+          }else{
+            alert('Wrong Email or Password!');
+            
+            // window.location.href = '/';
+            this.setState({
+              userData: null
+            })
+          }
+        }
+        
+       
+      }
+    }
 
 
     render() {
@@ -182,6 +275,11 @@ export class LoginRegister extends Component {
         }
 
         let failModalClose = () => this.setState({ failModalShow: false });
+        
+
+        
+       
+        
 
         return (
             <div className='main-content-login'>
@@ -195,13 +293,17 @@ export class LoginRegister extends Component {
 
 
                         <div className={loginFormActive ? 'login-main-form' : 'login-main-form hidden'}>
-                            <form className='login-form'>
+                            <form className='login-form' onSubmit={this.login} >
                                 <RiAccountPinCircleFill className='loginIcon'/>
-                                <input className='input' type='text' placeholder="Email"></input>
-                                <input className='input' type='password' placeholder="Password" />
-                                <button className='submit-button' type='submit' onClick={this.props.handler}>Login</button>
+                                <input className='input' name='email' type='text' value={this.state.emailInput} onChange={this.handleEmailInput} placeholder="Email"></input>
+                                <input className='input' name='password' type='password' value={this.state.passwordInput} onChange={this.handlePasswordInput} placeholder="Password" />
+                                <button className='submit-button' type='submit'>Login</button>
                                 <a href='/password-recovery' className='forgotPassword'>Forgot your password?</a>
+                                
+
                             </form>
+                            
+                            
                         </div>
 
 
@@ -210,7 +312,7 @@ export class LoginRegister extends Component {
                                 <ImUserPlus className='registerIcon'/>
                                 <h4 className='register-title'>Create a new account</h4>
                                 <div className='name-section'>
-                                    <input className='input-short' name="firstname" type='text' placeholder="First Name" value={this.state.fields.firstname} onChange={this.handleChange} onMouseLeave={() => this.validate}required/>
+                                    <input className='input-short' name="firstname" type='text' placeholder="First Name" value={this.state.fields.firstname} onChange={this.handleChange} required/>
                                     <input className='input-short' name="lastname" type='text' placeholder="Last Name" value={this.state.fields.lastname} onChange={this.handleChange} required/>
                                     <div className="errorMsg">{this.state.errors.name}</div>
                                     
@@ -232,10 +334,6 @@ export class LoginRegister extends Component {
                                     <div className="errorMsg">{this.state.errors.password}</div>
                                 </div>
                                 <button className='submit-button' type='submit'>Register</button>
-                               
-                                
-
-        
                             </form>
 
           {/* <ButtonToolbar className="add-button">
@@ -256,14 +354,21 @@ export class LoginRegister extends Component {
           <SuccessAlert
             show={this.state.successModalShow}
             onHide={successModalClose}
-            message='Registered Succesfully!'
+            message={this.state.alertMessage}
           ></SuccessAlert>
 
           <FailAlert
             show={this.state.failModalShow}
             onHide={failModalClose}
-            message='Registration Failed!'
+            message={this.state.alertMessage}
           ></FailAlert>
+{/* 
+          <LoginAuth
+            show={this.state.loginModalShow}
+            onHide={loginModalClose}
+            passwordHash = {this.state.userData[0].usr_password}
+            passwordInput = {this.state.passwordInput}
+          ></LoginAuth> */}
 
         
                         </div>
