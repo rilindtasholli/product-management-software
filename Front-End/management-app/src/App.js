@@ -15,21 +15,16 @@ export class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loginActive: false
+      loginActive: localStorage.loginActive
     };
 
-    this.handler = this.loginHandler.bind(this)
+    
   }
 
-  loginHandler() {
-      this.setState({
-        loginActive: true
-      })
-  }
 
   render() {
     
-    if(this.state.loginActive == true){
+    if(this.state.loginActive == "true"){
       return (
      
      

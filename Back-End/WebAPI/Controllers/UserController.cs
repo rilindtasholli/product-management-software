@@ -49,6 +49,28 @@ namespace WebAPI.Controllers
             return new JsonResult(table);
         }
 
+        [HttpGet("login/{email}")]
+        public JsonResult GetUserByEmail(string email)
+        {
+            string query = @"select * from dbo.Users where usr_email = '" + email +@"'";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ManagementAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table);
+        }
+
         [HttpPost]
         public JsonResult Post(User usr)
         {
@@ -128,6 +150,8 @@ namespace WebAPI.Controllers
             }
             return new JsonResult("Deleted Succesfuly!!");
         }
+
+
 
         /*
         [Route("SaveFile")]

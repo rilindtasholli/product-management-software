@@ -14,6 +14,8 @@ import './Navbar.css';
 function Navbar() {
     const [sidebar, setSideBar] = useState(false);
     const showSideBar = () => setSideBar(!sidebar);
+
+    
     return (
         <>
 
@@ -51,7 +53,7 @@ function Navbar() {
                     })}
                 </ul>
                 </Scrollbars>
-                <a className='logout-button' href='/'>Logout <FiLogOut size='15px'/></a>
+                <a className='logout-button' onClick={()=>{localStorage.setItem('loginActive', "false"); window.location.href  = '/'}}>Logout <FiLogOut size='15px'/></a>
             </nav>
         </>
     )
