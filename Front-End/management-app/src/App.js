@@ -9,6 +9,7 @@ import LoginRegister from './pages/LoginRegister';
 import Clients from './pages/Clients';
 import Employee from './pages/Employee';
 import Suppliers from './pages/Suppliers';
+import Categories from './pages/Categories';
 
 
 export class App extends Component {
@@ -43,8 +44,8 @@ export class App extends Component {
             <Route path='/dashboard' exact component={Dashboard}/>
             <Route path='/products' component={Products}/>
             <Route path='/clients' component={Clients}/>
-            <Route path='/categories' />
-            <Route path='/clients' component={Clients}/>
+            <Route path='/categories' component={Categories}/>
+          
             <Route path='/login' component={LoginRegister}/>
             <Route path='/employee' component={Employee}/>
             <Route path='/suppliers'component={Suppliers}/>

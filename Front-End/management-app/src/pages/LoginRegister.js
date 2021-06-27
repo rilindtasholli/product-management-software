@@ -21,6 +21,7 @@ export class LoginRegister extends Component {
         
         this.state = {
             loginFormActive: true,
+            Users:[],
             fields: {},
             errors: {},
             successModalShow: false,

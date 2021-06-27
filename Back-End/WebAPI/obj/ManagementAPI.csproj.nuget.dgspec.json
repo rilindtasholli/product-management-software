@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programim\\Product menagment\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj": {}
+    "C:\\Users\\Ernisa Sallahu\\Desktop\\PROJEKTI\\new\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj": {}
   },
   "projects": {
-    "D:\\Programim\\Product menagment\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj": {
+    "C:\\Users\\Ernisa Sallahu\\Desktop\\PROJEKTI\\new\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programim\\Product menagment\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Ernisa Sallahu\\Desktop\\PROJEKTI\\new\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj",
         "projectName": "ManagementAPI",
-        "projectPath": "D:\\Programim\\Product menagment\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj",
-        "packagesPath": "C:\\Users\\HP OMEN\\.nuget\\packages\\",
-        "outputPath": "D:\\Programim\\Product menagment\\product-management-software\\Back-End\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\Ernisa Sallahu\\Desktop\\PROJEKTI\\new\\product-management-software\\Back-End\\WebAPI\\ManagementAPI.csproj",
+        "packagesPath": "C:\\Users\\Ernisa Sallahu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ernisa Sallahu\\Desktop\\PROJEKTI\\new\\product-management-software\\Back-End\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\HP OMEN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ernisa Sallahu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
         }
       }
     }

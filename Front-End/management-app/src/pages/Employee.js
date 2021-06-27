@@ -4,7 +4,7 @@ import {Button,ButtonToolbar} from 'react-bootstrap';
 import {AddEmployee} from './modals/AddEmployee';
 import {EditEmployee} from './modals/EditEmployee';
 import './css/Employee.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { SuccessAlert } from "./modals/SuccessAlert";
 import { FailAlert } from "./modals/FailAlert";
 import { ConfirmAlert } from "./modals/ConfirmAlert";
