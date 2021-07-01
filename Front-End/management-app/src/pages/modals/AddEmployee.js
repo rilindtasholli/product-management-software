@@ -6,35 +6,72 @@ import { FailAlertModal } from "./FailAlertModal";
 export class AddEmployee extends Component{
     constructor(props){
         super(props);
-        //this.state={deps:[]};
         this.handleSubmit=this.handleSubmit.bind(this);
         this.state = {
-            // loginFormActive: true,
-            // fields: {},
-            // errors: {},
+             fields: {},
+             errors: {},
             successModalShow: false,
             failModalShow: false,
             alertMessage:null
             // confirmModalShow: false
             
         }
-        // this.handleFileSelected=this.handleFileSelected.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleValidation(){
+        let fields  = this.state.fields;
+        let errors = {};
+        let formIsValid = true;
+        //Name
+        if(typeof fields["Emp_name"] !== "undefined"){
+            if(!fields["Emp_name"].match(/^[a-zA-Z]+$/)){
+               formIsValid = false;
+               errors["Emp_name"] = "Please enter the name correctly";
+            }        
+         }
+         //Email
+         if(typeof fields["Emp_email"] !== "undefined"){
+            let lastAtPos = fields["Emp_email"].lastIndexOf('@');
+            let lastDotPos = fields["Emp_email"].lastIndexOf('.');
+
+            if (!(lastAtPos < lastDotPos && lastAtPos > 0 && 
+                fields["Emp_email"].indexOf('@@') == -1 && 
+                lastDotPos > 2 && 
+                (fields["Emp_email"].length - lastDotPos) > 2)) {
+               formIsValid = false;
+               errors["Emp_email"] = "Email is not valid";
+             }
+        }
+        //Phone
+        if (typeof fields["Emp_phone"] !== "undefined") {
+            var pattern = new RegExp(/^[0-9\b]+$/);
+            if (!pattern.test(fields["Emp_phone"])) {
+                formIsValid = false;
+              errors["Emp_phone"] = "Please enter only numbers.";
+            }else if(fields["Emp_phone"].length != 9){
+                formIsValid = false;
+              errors["Emp_phone"] = "Please enter valid phone number.";
+            }
+          }
+        this.setState({errors: errors});
+           return formIsValid;
     }
 
-    // photofilename = "upload.png";
-    // imagesrc = 'https://localhost:5001/Photos/'+this.photofilename;
-/* 
-    componentDidMount(){
-        fetch('https://localhost:5001/api/departament')
-        .then(response=>response.json())
-        .then(data=>{
-            this.setState({deps:data});
-        });
-    } */
+    handleChange(e){         
+        let fields = this.state.fields;
+        fields[e.target.name] = e.target.value;        
+        this.setState({fields});
+    }
 
     handleSubmit(event){
         event.preventDefault();
-        fetch('https://localhost:5001/api/employee',{
+        if(this.handleValidation()){
+            let fields = {};
+            fields["Emp_name"]="";
+            fields["Emp_phone"]="";
+            fields["Emp_email"]="";
+            this.setState({fields:fields});
+                    fetch('http://localhost:5000/api/employee',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -57,36 +94,12 @@ export class AddEmployee extends Component{
                 
             },
         (error)=>{
-            this.setState({ alertMessage:"Failed",failModalShow: true});
+            this.setState({ alertMessage:"Failed"+error,failModalShow: true});
             
           
         })
+        }
     }
-
-
-    // handleFileSelected(event){
-    //     event.preventDefault();
-    //     this.photofilename=event.target.files[0].name;
-    //     const formData = new FormData();
-    //     formData.append(
-    //         "myFile",
-    //         event.target.files[0],
-    //         event.target.files[0].name
-    //     );
-
-    //     fetch('https://localhost:5001/api/Employee/SaveFile',{
-    //         method:'POST',
-    //         body:formData
-    //     })
-    //     .then(res=>res.json())
-    //     .then((result)=>{
-    //         this.imagesrc='https://localhost:5001/Photos/'+result;
-    //     },
-    //     (error)=>{
-    //         alert('Failed');
-    //     })
-        
-    // }
 
     render(){
         let successModalClose = () => {
@@ -121,7 +134,10 @@ centered
                         name="Emp_name" 
                         required 
                         placeholder="Enter employee's full name"
+                        value={this.state.fields.Emp_name}
+                        onChange={this.handleChange}
                         />
+                        <span style={{color: "red"}}>{this.state.errors["Emp_name"]}</span>
                     </Form.Group>
 
 
@@ -131,8 +147,10 @@ centered
                         type="text" 
                         name="Emp_phone" required 
                         placeholder="Enter employee's phone number"
-                        
+                        value={this.state.fields.Emp_phone}
+                        onChange={this.handleChange}
                         />
+                        <span style={{color: "red"}}>{this.state.errors["Emp_phone"]}</span>
                     </Form.Group>
 
                     <Form.Group controlId="Emp_email">
@@ -141,8 +159,10 @@ centered
                         type="text" 
                         name="Emp_email" 
                         placeholder="Enter employee's email"
-                        
+                        value={this.state.fields.Emp_email}
+                        onChange={this.handleChange}
                         />
+                        <span style={{color: "red"}}>{this.state.errors["Emp_email"]}</span>
                     </Form.Group>
 
                     <Form.Group controlId="Emp_hourly_wage">
@@ -151,7 +171,7 @@ centered
                         type="text" 
                         name="Emp_hourly_wage" required 
                         placeholder="Enter employee's hourly wage"
-                        
+                        onChange={this.handleChange}
                         />
                     </Form.Group>
 
@@ -161,7 +181,7 @@ centered
                         type="text" 
                         name="Emp_hours" required 
                         placeholder="Enter employee's working hours"
-                        
+                        onChange={this.handleChange}
                         />
                     </Form.Group>
                     <Form.Group>

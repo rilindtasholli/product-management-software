@@ -9,7 +9,7 @@ import LoginRegister from './pages/LoginRegister';
 import Clients from './pages/Clients';
 import Employee from './pages/Employee';
 import Suppliers from './pages/Suppliers';
-
+import Sales from './pages/Sales';
 
 export class App extends Component {
   constructor(props) {
@@ -48,6 +48,7 @@ export class App extends Component {
             <Route path='/login' component={LoginRegister}/>
             <Route path='/employee' component={Employee}/>
             <Route path='/suppliers'component={Suppliers}/>
+            <Route path='/sales'component={Sales}/>
           </Switch>
           
        </Router>

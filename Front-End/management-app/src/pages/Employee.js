@@ -21,11 +21,27 @@ export class Employee extends Component{
             successModalShow: false,
             failModalShow: false,
             confirmModalShow: false,
-            alertMessage:null
+            alertMessage:null,
+            empsasc:[],
+            showHideTable1:true,
+            showHideTable2:false,
+            count:0
+        }
+        this.hideComponent = this.hideComponent.bind(this);
+    }
+    
+    hideComponent() {
+        const count= this.state.count;
+        this.setState({count:count+1});
+        if(count%2==0){
+            this.setState({ showHideTable2: false, showHideTable1:true });
+        }else{
+            this.setState({ showHideTable2: true, showHideTable1:false });
         }
     }
+
     refreshList(){
-        fetch('https://localhost:5001/api/employee')
+        fetch('http://localhost:5000/api/employee')
         .then(response=>response.json())
         .then(data=>{
             this.setState({emps:data});
@@ -54,16 +70,29 @@ export class Employee extends Component{
         })
     
       }
+      getEmployeesAsc(){
+        fetch('http://localhost:5000/api/employee/asc')
+        .then(response=>response.json())
+        .then(asc=>{
+            this.setState({empsasc: asc});
+        });
+    }
 
     render (){
-        const{emps, empid, empname, empphone,empemail,emphw,emph}=this.state;
+        const{showHideTable1, showHideTable2, emps, empid, empname, empphone,empemail,emphw,emph, empsasc}=this.state;
         let addModalClose=()=>this.setState({addModalShow:false});
         let editModalClose=()=>this.setState({editModalShow:false});
         let failModalClose = () => this.setState({ failModalShow: false });
         let confirmModalClose = () => this.setState({ confirmModalShow: false });
         return (
             <div class="div">
-                <Table className=" w-75 m-auto" striped  size="md" style={{textAlign:'center'}}>
+                <button onClick={() => {
+                    this.hideComponent();
+            }}>
+                Ascending
+              </button>
+                {showHideTable1 && (
+                <Table className=" w-75 m-auto" striped  size="md" style={{textAlign:'center'}} class="table1">
                     <thead class="thead" style={{background:'rgb(16,62,105)', 
                                                  color:'rgb(237,237,237)',
                                                  alignContent:'center'
@@ -109,6 +138,55 @@ export class Employee extends Component{
                             </tr>)}
                     </tbody>
                 </Table>
+                )}
+             {showHideTable2 && (
+                <Table className=" w-75 m-auto" striped  size="md" style={{textAlign:'center'}} class="table1">
+                    <thead class="thead" style={{background:'rgb(16,62,105)', 
+                                                 color:'rgb(237,237,237)',
+                                                 alignContent:'center'
+                                                 }}>
+                        <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Hourly Wage</th>
+                        <th>Hours</th>
+                        <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {empsasc.map(emp=>
+                            <tr key={emp.Emp_id}>
+                                <td>{emp.Emp_id}</td>
+                                <td>{emp.Emp_name}</td>
+                                <td>{emp.Emp_phone}</td>
+                                <td>{emp.Emp_email}</td>
+                                <td>{emp.Emp_hourly_wage}</td>
+                                <td>{emp.Emp_hours}</td>
+                                <td>
+<ButtonToolbar style={{display:'block'}}>
+    <Button className="mr-2" variant="info"
+    onClick={()=>this.setState({editModalShow:true, empid:emp.Emp_id, empname:emp.Emp_name, empphone:emp.Emp_phone,empemail:emp.Emp_email, emphw:emp.Emp_hourly_wage, emph:emp.Emp_hours})}
+    style={{width: 70}}>
+        Edit</Button>
+        <Button className="mr-2" variant="danger" onClick={()=>this.setState({alertMessage: 'Are you sure?', confirmModalShow:true, empid:emp.Emp_id})}
+     style={{width:70}}>
+        Delete</Button>
+        <EditEmployee show={this.state.editModalShow}
+                    onHide={editModalClose}
+                    empid={empid}
+                    empname={empname}
+                    empphone={empphone}
+                    empemail={empemail}
+                    emphw={emphw}
+                    emph={emph}/>
+</ButtonToolbar>        
+                                </td>
+                            </tr>)}
+                    </tbody>
+                </Table>
+                )};
                 <ButtonToolbar className="ml-5">
                     <Button variant='primary'
                     onClick={()=>this.setState({addModalShow:true})}>
